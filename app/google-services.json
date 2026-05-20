@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "407893585068",
+    "project_id": "cinesound-6ba33",
+    "storage_bucket": "cinesound-6ba33.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:407893585068:android:7f29ef0679bb15c11a4309",
+        "android_client_info": {
+          "package_name": "com.example.cinesound"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0sIMwDi3oQSiwq6FFhSYceHKLbGn0iF4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
