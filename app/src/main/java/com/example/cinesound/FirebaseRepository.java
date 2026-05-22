@@ -92,6 +92,7 @@ public class FirebaseRepository {
 
         Map<String, Object> dados = new HashMap<>();
 
+        dados.put("uid", uid);
         dados.put("tmdbId", titulo.tmdbId);
         dados.put("titulo", titulo.titulo);
         dados.put("poster", titulo.poster);
