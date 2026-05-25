@@ -1,9 +1,197 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.Cinesound" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- =============================================
+         CINESOUND — Tema principal (Dark)
+         Base: Material3 com Dark Theme fixo
+         ============================================= -->
+
+    <style name="Theme.CineSound" parent="Theme.Material3.Dark.NoActionBar">
+
+        <!-- Cores primárias -->
+        <item name="colorPrimary">@color/accent</item>
+        <item name="colorOnPrimary">@color/text_primary</item>
+        <item name="colorPrimaryContainer">@color/accent_surface</item>
+        <item name="colorOnPrimaryContainer">@color/accent_light</item>
+
+        <!-- Cores secundárias -->
+        <item name="colorSecondary">@color/accent_light</item>
+        <item name="colorOnSecondary">@color/text_primary</item>
+        <item name="colorSecondaryContainer">@color/accent_surface</item>
+        <item name="colorOnSecondaryContainer">@color/text_secondary</item>
+
+        <!-- Fundo e superfície -->
+        <item name="android:colorBackground">@color/bg_primary</item>
+        <item name="colorSurface">@color/card_bg</item>
+        <item name="colorOnSurface">@color/text_primary</item>
+        <item name="colorSurfaceVariant">@color/card_bg_elevated</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+
+        <!-- Erro -->
+        <item name="colorError">@color/red_negative</item>
+        <item name="colorOnError">@color/text_primary</item>
+
+        <!-- Contorno -->
+        <item name="colorOutline">@color/text_hint</item>
+
+        <!-- Status bar e navigation bar -->
+        <item name="android:statusBarColor">@color/bg_primary</item>
+        <item name="android:navigationBarColor">@color/bg_secondary</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+
+        <!-- Window -->
+        <item name="android:windowBackground">@color/bg_primary</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimation.CineSound</item>
+
+        <!-- TextInputLayout -->
+        <item name="textInputStyle">@style/Widget.CineSound.TextInputLayout</item>
+
+        <!-- MaterialCardView padrão -->
+        <item name="materialCardViewStyle">@style/Widget.CineSound.Card</item>
+
+        <!-- BottomNavigationView -->
+        <item name="bottomNavigationStyle">@style/Widget.CineSound.BottomNav</item>
+
+        <!-- Chip -->
+        <item name="chipStyle">@style/Widget.CineSound.Chip</item>
+
+        <!-- Button -->
+        <item name="materialButtonStyle">@style/Widget.CineSound.Button</item>
+
     </style>
 
-    <style name="Theme.Cinesound" parent="Base.Theme.Cinesound" />
+    <!-- Tema sem action bar para Splash -->
+    <style name="Theme.CineSound.Splash" parent="Theme.CineSound">
+        <item name="android:windowSplashScreenBackground">@color/bg_primary</item>
+    </style>
+
+    <!-- =============================================
+         Animações de transição entre telas
+         ============================================= -->
+    <style name="WindowAnimation.CineSound" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <!-- =============================================
+         Widgets customizados
+         ============================================= -->
+
+    <!-- TextInputLayout estilo CineSound -->
+    <style name="Widget.CineSound.TextInputLayout"
+        parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/bg_tertiary</item>
+        <item name="boxStrokeColor">@color/border_medium</item>
+        <item name="boxStrokeColorStateList">@color/text_input_stroke_color</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_medium</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_medium</item>
+        <item name="hintTextColor">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+    </style>
+
+    <!-- MaterialCardView padrão -->
+    <style name="Widget.CineSound.Card" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/card_bg</item>
+        <item name="cardCornerRadius">@dimen/radius_large</item>
+        <item name="cardElevation">0dp</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/border_subtle</item>
+    </style>
+
+    <!-- Card levemente elevado (para destaques) -->
+    <style name="Widget.CineSound.Card.Elevated">
+        <item name="cardBackgroundColor">@color/card_bg_elevated</item>
+        <item name="strokeColor">@color/border_medium</item>
+    </style>
+
+    <!-- Card Top 1 (bordas douradas) -->
+    <style name="Widget.CineSound.Card.Top1">
+        <item name="strokeColor">#40FFD700</item>
+        <item name="strokeWidth">1.5dp</item>
+    </style>
+
+    <!-- BottomNavigationView -->
+    <style name="Widget.CineSound.BottomNav" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/bg_secondary</item>
+        <item name="itemIconTint">@color/bottom_nav_icon_color</item>
+        <item name="itemTextColor">@color/bottom_nav_icon_color</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.CineSound.BottomNav.ActiveIndicator</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <style name="Widget.CineSound.BottomNav.ActiveIndicator"
+        parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
+        <item name="android:color">@color/accent_surface</item>
+    </style>
+
+    <!-- Chips de filtro -->
+    <style name="Widget.CineSound.Chip" parent="Widget.Material3.Chip.Filter">
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="chipBackgroundColor">@color/chip_bg_color</item>
+        <item name="chipStrokeColor">@color/chip_stroke_color</item>
+        <item name="chipStrokeWidth">1.5dp</item>
+        <item name="chipCornerRadius">@dimen/radius_round</item>
+        <item name="android:textSize">@dimen/text_sm</item>
+    </style>
+
+    <!-- Botão primário -->
+    <style name="Widget.CineSound.Button" parent="Widget.Material3.Button">
+        <item name="android:background">@drawable/bg_button_primary</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">@dimen/text_lg</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="cornerRadius">@dimen/radius_medium</item>
+        <item name="elevation">0dp</item>
+    </style>
+
+    <!-- Botão de classificação (outline) -->
+    <style name="Widget.CineSound.Button.Rate" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/text_secondary</item>
+        <item name="strokeColor">@color/border_medium</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="cornerRadius">@dimen/radius_medium</item>
+        <item name="android:background">@color/card_bg</item>
+    </style>
+
+    <!-- Botão de logout (outline vermelho) -->
+    <style name="Widget.CineSound.Button.Logout" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:textColor">@color/red_negative</item>
+        <item name="strokeColor">#66E8534A</item>
+        <item name="strokeWidth">1.5dp</item>
+        <item name="cornerRadius">@dimen/radius_medium</item>
+    </style>
+
+    <!-- Toolbar transparente -->
+    <style name="Widget.CineSound.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/bg_primary</item>
+        <item name="titleTextColor">@color/text_primary</item>
+        <item name="navigationIconTint">@color/text_primary</item>
+    </style>
+
+    <!-- Texto — título de seção -->
+    <style name="TextAppearance.CineSound.SectionTitle">
+        <item name="android:textSize">@dimen/text_lg</item>
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+
+    <!-- Texto — subtítulo -->
+    <style name="TextAppearance.CineSound.Subtitle">
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:textColor">@color/text_secondary</item>
+    </style>
+
+    <!-- Texto — rating badge -->
+    <style name="TextAppearance.CineSound.RatingBadge">
+        <item name="android:textSize">@dimen/text_sm</item>
+        <item name="android:textColor">@color/yellow_star</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>

@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CINESOUND — TELA 8: Perfil do Usuário
+    Dados: FirebaseAuth (nome/email) + Firestore (histórico de ratings)
+    Seções: Avatar · Histórico · Filmes · Séries · Trilhas · Logout
+    Cada seção tem um RecyclerView horizontal com os pôsteres classificados
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    tools:context=".ui.profile.ProfileFragment">
+
+    <!-- Todo o conteúdo dentro de um NestedScrollView para rolar suavemente -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/spacing_24">
+
+            <!-- =============================================
+                 CABEÇALHO: Título + subtítulo da tela
+                 ============================================= -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/spacing_20"
+                android:paddingTop="@dimen/spacing_20"
+                android:paddingBottom="@dimen/spacing_16">
+
+                <TextView
+                    android:id="@+id/tv_profile_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_title"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/accent"
+                    android:fontFamily="@font/syne_bold" />
+
+                <TextView
+                    android:id="@+id/tv_profile_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_2"
+                    android:text="@string/profile_subtitle"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary" />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 CARD: Informações do usuário
+                 Avatar · Nome · Email · Botão alterar perfil
+                 ============================================= -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_user_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_16"
+                android:layout_marginBottom="@dimen/spacing_16"
+                app:cardBackgroundColor="@color/card_bg"
+                app:cardCornerRadius="@dimen/radius_large"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/border_subtle">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/spacing_16">
+
+                    <!-- Avatar (foto de perfil ou ícone padrão) -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_avatar"
+                        android:layout_width="@dimen/avatar_size"
+                        android:layout_height="@dimen/avatar_size"
+                        app:cardCornerRadius="50dp"
+                        app:cardBackgroundColor="@color/bg_tertiary"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="2dp"
+                        app:strokeColor="@color/border_medium"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:contentDescription="@string/cd_avatar"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <!-- Foto do usuário (via Glide/Coil) -->
+                        <ImageView
+                            android:id="@+id/iv_avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="@null" />
+
+                        <!-- Ícone padrão (visível quando não há foto) -->
+                        <ImageView
+                            android:id="@+id/iv_avatar_placeholder"
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_photo_camera"
+                            app:tint="@color/text_hint"
+                            android:contentDescription="@null" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Bloco de informações textuais -->
+                    <LinearLayout
+                        android:id="@+id/user_info_block"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/spacing_14"
+                        app:layout_constraintTop_toTopOf="@id/card_avatar"
+                        app:layout_constraintBottom_toBottomOf="@id/card_avatar"
+                        app:layout_constraintStart_toEndOf="@id/card_avatar"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <!-- Nome do usuário -->
+                        <TextView
+                            android:id="@+id/tv_user_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:fontFamily="@font/syne_bold"
+                            tools:text="Ronaldo Nazário" />
+
+                        <!-- Email -->
+                        <TextView
+                            android:id="@+id/tv_user_email"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/spacing_2"
+                            android:textSize="13sp"
+                            android:textColor="@color/accent_light"
+                            tools:text="ronaldonazario@gmail.com" />
+
+                        <!-- Botão alterar perfil -->
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btn_edit_profile"
+                            style="@style/Widget.Material3.Button.OutlinedButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_marginTop="@dimen/spacing_8"
+                            android:text="@string/profile_edit"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary"
+                            android:paddingHorizontal="@dimen/spacing_12"
+                            app:icon="@drawable/ic_edit"
+                            app:iconTint="@color/text_secondary"
+                            app:iconSize="14dp"
+                            app:strokeColor="@color/border_medium"
+                            app:strokeWidth="1dp"
+                            app:cornerRadius="@dimen/spacing_6"
+                            android:backgroundTint="@android:color/transparent" />
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- =============================================
+                 SEÇÃO: Histórico de classificações
+                 Mostra os últimos títulos avaliados
+                 ============================================= -->
+            <LinearLayout
+                android:id="@+id/section_history"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_20">
+
+                <!-- Label da seção -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:layout_marginBottom="@dimen/spacing_12">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_star_filled"
+                        app:tint="@color/text_secondary"
+                        android:contentDescription="@null"
+                        android:layout_marginEnd="@dimen/spacing_8" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/profile_history"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:id="@+id/tv_history_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_hint"
+                        tools:text="42 títulos" />
+
+                </LinearLayout>
+
+                <!-- RecyclerView horizontal dos pôsteres classificados -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_profile_mini_card"
+                    tools:itemCount="6" />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 SEÇÃO: Filmes favoritos (classificados como "Amei")
+                 ============================================= -->
+            <LinearLayout
+                android:id="@+id/section_fav_movies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_20">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:layout_marginBottom="@dimen/spacing_12">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_movie"
+                        app:tint="@color/text_secondary"
+                        android:contentDescription="@null"
+                        android:layout_marginEnd="@dimen/spacing_8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_fav_movies"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_fav_movies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_profile_mini_card"
+                    tools:itemCount="5" />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 SEÇÃO: Séries favoritas
+                 ============================================= -->
+            <LinearLayout
+                android:id="@+id/section_fav_series"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_20">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:layout_marginBottom="@dimen/spacing_12">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_tv"
+                        app:tint="@color/text_secondary"
+                        android:contentDescription="@null"
+                        android:layout_marginEnd="@dimen/spacing_8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_fav_series"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_fav_series"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_profile_mini_card"
+                    tools:itemCount="5" />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 SEÇÃO: Trilhas favoritas
+                 ============================================= -->
+            <LinearLayout
+                android:id="@+id/section_fav_soundtracks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_24">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:layout_marginBottom="@dimen/spacing_12">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_music_note"
+                        app:tint="@color/text_secondary"
+                        android:contentDescription="@null"
+                        android:layout_marginEnd="@dimen/spacing_8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_fav_soundtracks"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_fav_soundtracks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_profile_mini_card"
+                    tools:itemCount="5" />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 BOTÃO: Logout
+                 FirebaseAuth.signOut() + redireciona para Login
+                 ============================================= -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_logout"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/rate_btn_height"
+                android:layout_marginHorizontal="@dimen/spacing_16"
+                android:text="@string/btn_logout"
+                android:textSize="14sp"
+                android:textColor="@color/red_negative"
+                app:icon="@drawable/ic_logout"
+                app:iconTint="@color/red_negative"
+                app:iconSize="18dp"
+                app:strokeColor="#66E8534A"
+                app:strokeWidth="1.5dp"
+                app:cornerRadius="@dimen/radius_medium"
+                android:backgroundTint="@android:color/transparent" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

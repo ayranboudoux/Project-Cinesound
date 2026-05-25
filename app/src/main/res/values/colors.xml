@@ -1,5 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+
+    <!-- =============================================
+         CINESOUND — Paleta de Cores
+         Dark Theme: inspirado em Netflix / Letterboxd
+         ============================================= -->
+
+    <!-- Fundos -->
+    <color name="bg_primary">#0D0D0F</color>
+    <color name="bg_secondary">#141418</color>
+    <color name="bg_tertiary">#1C1C22</color>
+
+    <!-- Cards -->
+    <color name="card_bg">#1E1E26</color>
+    <color name="card_bg_elevated">#252530</color>
+
+    <!-- Accent principal — roxo -->
+    <color name="accent">#7B5CF0</color>
+    <color name="accent_light">#9B7EF8</color>
+    <color name="accent_dark">#5B3FD0</color>
+    <color name="accent_surface">#1A1430</color>
+
+    <!-- Texto -->
+    <color name="text_primary">#F0EFF8</color>
+    <color name="text_secondary">#A09DB8</color>
+    <color name="text_hint">#6B6882</color>
+
+    <!-- Bordas -->
+    <color name="border_subtle">#12FFFFFF</color>     <!-- ~7% alpha -->
+    <color name="border_medium">#1FFFFFFF</color>     <!-- ~12% alpha -->
+    <color name="border_strong">#33FFFFFF</color>     <!-- ~20% alpha -->
+
+    <!-- Semânticas -->
+    <color name="yellow_star">#F5C542</color>
+    <color name="green_positive">#22D07A</color>
+    <color name="red_negative">#E8534A</color>
+    <color name="blue_info">#4A9EFF</color>
+
+    <!-- Rank badges -->
+    <color name="rank_gold_start">#FFD700</color>
+    <color name="rank_gold_end">#FFA500</color>
+    <color name="rank_silver_start">#C0C0C0</color>
+    <color name="rank_silver_end">#888888</color>
+    <color name="rank_bronze_start">#CD7F32</color>
+    <color name="rank_bronze_end">#8B4513</color>
+
+    <!-- Material theme overrides -->
+    <color name="md_theme_dark_primary">#7B5CF0</color>
+    <color name="md_theme_dark_onPrimary">#FFFFFF</color>
+    <color name="md_theme_dark_primaryContainer">#3B1F9E</color>
+    <color name="md_theme_dark_onPrimaryContainer">#E5DEFF</color>
+    <color name="md_theme_dark_secondary">#9B7EF8</color>
+    <color name="md_theme_dark_onSecondary">#FFFFFF</color>
+    <color name="md_theme_dark_secondaryContainer">#1A1430</color>
+    <color name="md_theme_dark_onSecondaryContainer">#D4C4FF</color>
+    <color name="md_theme_dark_background">#0D0D0F</color>
+    <color name="md_theme_dark_onBackground">#F0EFF8</color>
+    <color name="md_theme_dark_surface">#1E1E26</color>
+    <color name="md_theme_dark_onSurface">#F0EFF8</color>
+    <color name="md_theme_dark_surfaceVariant">#252530</color>
+    <color name="md_theme_dark_onSurfaceVariant">#A09DB8</color>
+    <color name="md_theme_dark_outline">#6B6882</color>
+    <color name="md_theme_dark_error">#E8534A</color>
+    <color name="md_theme_dark_onError">#FFFFFF</color>
+
 </resources>

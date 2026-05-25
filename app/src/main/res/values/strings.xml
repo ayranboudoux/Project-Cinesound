@@ -1,3 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Cinesound</string>
+
+    <!-- App -->
+    <string name="app_name">CineSound</string>
+    <string name="app_tagline">A trilha perfeita para sua maratona</string>
+    <string name="app_version">App v1.2.3</string>
+
+    <!-- Login -->
+    <string name="hint_email">você@exemplo.com</string>
+    <string name="hint_password">Digite sua senha</string>
+    <string name="label_email">E-mail</string>
+    <string name="label_password">Senha</string>
+    <string name="btn_login">Conecte-se</string>
+    <string name="btn_create_account">Criar uma conta</string>
+    <string name="link_forgot_password">Esqueci minha senha</string>
+    <string name="login_terms">Ao continuar, você concorda com nossos Termos de Serviço e Política de Privacidade.</string>
+
+    <!-- Recuperação de senha -->
+    <string name="forgot_title">Recuperar senha</string>
+    <string name="forgot_description">Informe seu e-mail cadastrado e enviaremos um link para redefinir sua senha.</string>
+    <string name="btn_send_recovery">Enviar link de recuperação</string>
+    <string name="btn_back_to_login">Voltar para o login</string>
+    <string name="forgot_success">Link enviado! Verifique sua caixa de entrada.</string>
+
+    <!-- Home -->
+    <string name="home_title">Recomendações</string>
+    <string name="home_subtitle">Recomendações personalizadas com base nas suas avaliações recentes e no seu histórico de visualização.</string>
+
+    <!-- Trending -->
+    <string name="trending_title">Mais curtidos essa semana</string>
+
+    <!-- Catálogo -->
+    <string name="catalog_hint_search">Pesquisar…</string>
+    <string name="catalog_btn_random">Random</string>
+    <string name="filter_tipo">Tipo</string>
+    <string name="filter_genero">Gênero</string>
+    <string name="filter_ordenar">Organizar</string>
+
+    <!-- Busca -->
+    <string name="search_hint">Pesquisar filmes, séries…</string>
+    <string name="search_empty">Nenhum resultado encontrado.</string>
+
+    <!-- Filtros comuns -->
+    <string name="filter_all">Todos</string>
+    <string name="filter_movies">Filmes</string>
+    <string name="filter_series">Séries</string>
+    <string name="filter_az">A–Z</string>
+    <string name="filter_za">Z–A</string>
+    <string name="filter_rating">Nota</string>
+    <string name="filter_newest">Mais recentes</string>
+
+    <!-- Gêneros -->
+    <string name="genre_action">Ação</string>
+    <string name="genre_drama">Drama</string>
+    <string name="genre_scifi">Sci-Fi</string>
+    <string name="genre_horror">Terror</string>
+    <string name="genre_comedy">Comédia</string>
+    <string name="genre_animation">Animação</string>
+    <string name="genre_crime">Crime</string>
+    <string name="genre_thriller">Thriller</string>
+
+    <!-- Detalhes -->
+    <string name="detail_synopsis">Sinopse</string>
+    <string name="detail_cast">Elenco</string>
+    <string name="detail_soundtrack">Trilha Sonora</string>
+    <string name="detail_where_to_watch">Onde assistir?</string>
+    <string name="detail_your_rating">Sua classificação</string>
+    <string name="detail_see_all">Ver tudo</string>
+    <string name="detail_genre_label">Gênero</string>
+    <string name="detail_release_label">Realização</string>
+    <string name="detail_duration_label">Duração / Temp</string>
+    <string name="detail_classification_label">Classificação</string>
+    <string name="detail_votes_format">IMDb · %1$s votos</string>
+
+    <!-- Classificação -->
+    <string name="rate_loved">Amei</string>
+    <string name="rate_liked">Gostei</string>
+    <string name="rate_disliked">Não gostei</string>
+    <string name="rate_hated">Odiei</string>
+
+    <!-- Perfil -->
+    <string name="profile_title">Perfil do usuário</string>
+    <string name="profile_subtitle">Gerencie suas informações e veja todo o seu histórico.</string>
+    <string name="profile_edit">Alterar perfil</string>
+    <string name="profile_history">Seu histórico de classificações</string>
+    <string name="profile_fav_movies">Seus filmes favoritos</string>
+    <string name="profile_fav_series">Suas séries favoritas</string>
+    <string name="profile_fav_soundtracks">Suas trilhas favoritas</string>
+    <string name="btn_logout">Sair da conta</string>
+
+    <!-- Bottom Nav -->
+    <string name="nav_home">Início</string>
+    <string name="nav_trending">Em Alta</string>
+    <string name="nav_catalog">Catálogo</string>
+    <string name="nav_profile">Perfil</string>
+
+    <!-- Content descriptions (acessibilidade) -->
+    <string name="cd_poster">Pôster de %1$s</string>
+    <string name="cd_back">Voltar</string>
+    <string name="cd_search">Buscar</string>
+    <string name="cd_toggle_password">Mostrar/ocultar senha</string>
+    <string name="cd_bookmark">Salvar na lista</string>
+    <string name="cd_avatar">Foto de perfil</string>
+
 </resources>

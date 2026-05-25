@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CINESOUND — TELA 7: Detalhes do Título
+    Dados: TMDB /movie/{id} ou /tv/{id}, /credits, /watch/providers
+    Layout: NestedScrollView com CollapsingToolbarLayout
+    Seções: Banner · Info · Elenco · Trilha Sonora · Onde Assistir · Classificação
+-->
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/detail_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    tools:context=".ui.detail.DetailsActivity">
+
+    <!-- =============================================
+         APP BAR com CollapsingToolbar
+         Banner/pôster com parallax ao rolar
+         ============================================= -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/detail_banner_height"
+        android:fitsSystemWindows="true"
+        app:liftOnScroll="false"
+        android:background="@color/bg_primary">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/bg_primary"
+            app:expandedTitleMarginStart="@dimen/spacing_16"
+            app:expandedTitleMarginBottom="@dimen/spacing_16"
+            app:titleEnabled="false">
+
+            <!-- Banner (imagem de fundo do filme) -->
+            <ImageView
+                android:id="@+id/iv_banner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:contentDescription="@null"
+                android:fitsSystemWindows="true"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7"
+                tools:src="@tools:sample/backgrounds/scenic" />
+
+            <!-- Gradiente escuro sobre o banner -->
+
+            <!-- Toolbar fixa (botão voltar + bookmark) -->
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Botão voltar -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_back"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        app:icon="@drawable/ic_arrow_back"
+                        app:iconTint="@android:color/white"
+                        app:iconSize="20dp"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        app:backgroundTint="#66000000"
+                        app:cornerRadius="50dp"
+                        android:contentDescription="@string/cd_back"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <!-- Botão salvar (bookmark) -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_bookmark"
+                        style="@style/Widget.Material3.Button.IconButton"
+                        android:layout_width="38dp"
+                        android:layout_height="38dp"
+                        app:icon="@drawable/ic_bookmark"
+                        app:iconTint="@color/yellow_star"
+                        app:iconSize="20dp"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp"
+                        app:backgroundTint="#66000000"
+                        app:cornerRadius="50dp"
+                        android:contentDescription="@string/cd_bookmark"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- =============================================
+         CONTEÚDO ROLÁVEL
+         NestedScrollView para funcionar com CoordinatorLayout
+         ============================================= -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- =============================================
+                 Pôster pequeno sobreposto ao banner
+                 Posicionado via margin negativa
+                 ============================================= -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_16">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_poster"
+                    android:layout_width="@dimen/poster_detail_width"
+                    android:layout_height="@dimen/poster_detail_height"
+                    android:layout_marginStart="@dimen/spacing_16"
+                    app:cardCornerRadius="@dimen/radius_large"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/bg_primary">
+
+                    <ImageView
+                        android:id="@+id/iv_poster"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="@null"
+                        tools:src="@tools:sample/backgrounds/scenic" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </FrameLayout>
+
+            <!-- =============================================
+                 BLOCO 1: Título, ano, metadados, sinopse
+                 ============================================= -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/spacing_16"
+                android:paddingTop="@dimen/spacing_12">
+
+                <!-- Linha: Título + Bookmark (já está na toolbar, mas visível na área expandida) -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_4">
+
+                    <TextView
+                        android:id="@+id/tv_title"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:fontFamily="@font/syne_bold"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/space_bookmark"
+                        tools:text="The Last Odyssey" />
+
+                    <Space
+                        android:id="@+id/space_bookmark"
+                        android:layout_width="32dp"
+                        android:layout_height="1dp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- Metadados: ano · gênero · duração -->
+                <TextView
+                    android:id="@+id/tv_meta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginBottom="@dimen/spacing_12"
+                    tools:text="2026 · Aventura · 2h" />
+
+                <!-- Linha de estrelas + nota IMDb -->
+                <LinearLayout
+                    android:id="@+id/rating_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="@dimen/spacing_12">
+
+                    <!-- 5 estrelas (ajustadas via código) -->
+                    <ImageView android:id="@+id/star1" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_filled" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
+                    <ImageView android:id="@+id/star2" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_filled" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
+                    <ImageView android:id="@+id/star3" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_filled" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
+                    <ImageView android:id="@+id/star4" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_filled" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
+                    <ImageView android:id="@+id/star5" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_outline" app:tint="@color/bg_tertiary" android:contentDescription="@null" android:layout_marginEnd="@dimen/spacing_8"/>
+
+                    <TextView
+                        android:id="@+id/tv_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginEnd="@dimen/spacing_6"
+                        tools:text="8.4" />
+
+                    <TextView
+                        android:id="@+id/tv_votes"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_hint"
+                        tools:text="IMDb · 124.589 votos" />
+
+                </LinearLayout>
+
+                <!-- Sinopse -->
+                <TextView
+                    android:id="@+id/tv_synopsis"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingMultiplier="1.6"
+                    android:layout_marginBottom="@dimen/spacing_16"
+                    tools:text="When an interstellar expedition uncovers an ancient relic, Captain Mira Alvarez must navigate political intrigue and cosmic dangers to prevent a catastrophic war between civilizations." />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 BLOCO 2: Grid de informações (Gênero, Data, Duração, Classificação)
+                 ============================================= -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_info_grid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_16"
+                android:layout_marginBottom="@dimen/spacing_20"
+                android:nestedScrollingEnabled="false"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="2"
+                tools:listitem="@layout/item_info_card"
+                tools:itemCount="4" />
+
+            <!-- =============================================
+                 BLOCO 3: Elenco principal (scroll horizontal)
+                 ============================================= -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_20">
+
+                <!-- Header da seção -->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:layout_marginBottom="@dimen/spacing_12">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_cast"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_see_all_cast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_see_all"
+                        android:textSize="12sp"
+                        android:textColor="@color/accent_light"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground"
+                        android:paddingVertical="@dimen/spacing_4"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <!-- RecyclerView horizontal de atores -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_cast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_cast_member"
+                    tools:itemCount="6" />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 BLOCO 4: Trilha Sonora (scroll horizontal)
+                 ============================================= -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_20">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:layout_marginBottom="@dimen/spacing_12">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_soundtrack"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <TextView
+                        android:id="@+id/tv_see_all_soundtrack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/detail_see_all"
+                        android:textSize="12sp"
+                        android:textColor="@color/accent_light"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground"
+                        android:paddingVertical="@dimen/spacing_4"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_soundtrack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_soundtrack"
+                    tools:itemCount="5" />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 BLOCO 5: Onde Assistir (plataformas de streaming)
+                 ============================================= -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/spacing_20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/spacing_16"
+                    android:layout_marginBottom="@dimen/spacing_12"
+                    android:text="@string/detail_where_to_watch"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_platforms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    android:paddingHorizontal="@dimen/spacing_16"
+                    android:scrollbars="none"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_platform"
+                    tools:itemCount="5" />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 BLOCO 6: Botões de Classificação do Usuário
+                 Amei · Gostei · Não Gostei · Odiei
+                 Salvo no Firestore: users/{uid}/ratings/{mediaId}
+                 ============================================= -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/spacing_16"
+                android:paddingBottom="@dimen/spacing_32">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_12"
+                    android:text="@string/detail_your_rating"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <!-- Grade 2x2 de botões de classificação -->
+                <androidx.gridlayout.widget.GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:useDefaultMargins="false">
+
+                    <!-- Amei -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_loved"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/rate_btn_height"
+                        android:layout_marginEnd="@dimen/spacing_8"
+                        android:layout_marginBottom="@dimen/spacing_8"
+                        android:text="@string/rate_loved"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        app:icon="@drawable/ic_heart"
+                        app:iconTint="@color/text_secondary"
+                        app:iconSize="16dp"
+                        app:strokeColor="@color/border_medium"
+                        app:strokeWidth="1.5dp"
+                        app:cornerRadius="@dimen/radius_medium"
+                        android:backgroundTint="@color/card_bg"
+                        app:layout_columnWeight="1"
+                        app:layout_rowSpec="0" />
+
+                    <!-- Gostei -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_liked"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/rate_btn_height"
+                        android:layout_marginBottom="@dimen/spacing_8"
+                        android:text="@string/rate_liked"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        app:icon="@drawable/ic_thumb_up"
+                        app:iconTint="@color/text_secondary"
+                        app:iconSize="16dp"
+                        app:strokeColor="@color/border_medium"
+                        app:strokeWidth="1.5dp"
+                        app:cornerRadius="@dimen/radius_medium"
+                        android:backgroundTint="@color/card_bg"
+                        app:layout_columnWeight="1"
+                        app:layout_rowSpec="0" />
+
+                    <!-- Não gostei -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_disliked"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/rate_btn_height"
+                        android:layout_marginEnd="@dimen/spacing_8"
+                        android:text="@string/rate_disliked"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        app:icon="@drawable/ic_thumb_down"
+                        app:iconTint="@color/text_secondary"
+                        app:iconSize="16dp"
+                        app:strokeColor="@color/border_medium"
+                        app:strokeWidth="1.5dp"
+                        app:cornerRadius="@dimen/radius_medium"
+                        android:backgroundTint="@color/card_bg"
+                        app:layout_columnWeight="1"
+                        app:layout_rowSpec="1" />
+
+                    <!-- Odiei -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_hated"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/rate_btn_height"
+                        android:text="@string/rate_hated"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="13sp"
+                        app:icon="@drawable/ic_mood_sad"
+                        app:iconTint="@color/text_secondary"
+                        app:iconSize="16dp"
+                        app:strokeColor="@color/border_medium"
+                        app:strokeWidth="1.5dp"
+                        app:cornerRadius="@dimen/radius_medium"
+                        android:backgroundTint="@color/card_bg"
+                        app:layout_columnWeight="1"
+                        app:layout_rowSpec="1" />
+
+                </androidx.gridlayout.widget.GridLayout>
+
+                <!--
+                    NOTA PARA O DESENVOLVEDOR:
+                    Quando um botão é selecionado, aplique via código:
+                      btn.backgroundTintList = ColorStateList.valueOf(getColor(R.color.accent))
+                      btn.setTextColor(getColor(R.color.text_primary))
+                      btn.iconTint = ColorStateList.valueOf(getColor(R.color.text_primary))
+                    E desmarque os outros três botões voltando ao estado padrão.
+                    Salvar no Firestore: db.collection("users").document(uid)
+                        .collection("ratings").document(mediaId).set(ratingData)
+                -->
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
