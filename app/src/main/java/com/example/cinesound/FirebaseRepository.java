@@ -60,7 +60,7 @@ public class FirebaseRepository {
 
     //Perfil do usuario
 
-    public void salvarPefil(String uid, String nome, String email, OnSuccessListener<Void> onSucesso, OnFailureListener onErro) {
+    public void salvarPerfil(String uid, String nome, String email, OnSuccessListener<Void> onSucesso, OnFailureListener onErro) {
         Map<String, Object> dados = new HashMap<>();
         dados.put("uid", uid);
         dados.put("nome", nome);
