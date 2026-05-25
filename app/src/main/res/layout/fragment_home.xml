@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CINESOUND — TELA 3: Home / Recomendações Personalizadas
+    Exibe títulos recomendados com base nos gêneros curtidos
+    Dados: Firestore (recomendações) + TMDB API
+    Filtros: Todos / Filmes / Séries (ChipGroup horizontal)
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    tools:context=".ui.home.HomeFragment">
+
+    <!-- =============================================
+         TOOLBAR: Logo + botão de busca
+         ============================================= -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/toolbar_height"
+        android:background="@color/bg_primary"
+        android:paddingHorizontal="@dimen/spacing_16"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Layout interno da toolbar: logo à esq., botão de busca à dir. -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Ícone do logo -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/logo_icon"
+                android:layout_width="@dimen/logo_size"
+                android:layout_height="@dimen/logo_size"
+                app:cardCornerRadius="10dp"
+                app:cardBackgroundColor="@color/accent"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_logo_wave"
+                    android:contentDescription="@null"
+                    app:tint="@android:color/white" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Nome do app -->
+            <TextView
+                android:id="@+id/tv_logo_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:fontFamily="@font/syne_bold"
+                android:layout_marginStart="@dimen/spacing_8"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/logo_icon" />
+
+            <!-- Botão de busca (ícone) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_search"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="@dimen/icon_btn_size"
+                android:layout_height="@dimen/icon_btn_size"
+                app:icon="@drawable/ic_search"
+                app:iconTint="@color/text_secondary"
+                app:iconSize="20dp"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:backgroundTint="@color/bg_tertiary"
+                app:cornerRadius="50dp"
+                android:contentDescription="@string/cd_search"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Linha divisora sutil abaixo da toolbar -->
+    <View
+        android:id="@+id/toolbar_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/border_subtle"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- =============================================
+         Título da seção
+         ============================================= -->
+    <TextView
+        android:id="@+id/tv_section_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_20"
+        android:layout_marginTop="@dimen/spacing_16"
+        android:text="@string/home_title"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        android:fontFamily="@font/syne_bold"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- =============================================
+         FILTROS: ChipGroup horizontal scrollável
+         Opções: Filmes / Séries / Todos
+         ============================================= -->
+    <HorizontalScrollView
+        android:id="@+id/scroll_filters"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_12"
+        android:scrollbars="none"
+        android:paddingHorizontal="@dimen/spacing_20"
+        app:layout_constraintTop_toBottomOf="@id/tv_section_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            android:orientation="horizontal">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_movies"
+                style="@style/Widget.CineSound.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/chip_height"
+                android:text="@string/filter_movies" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_series"
+                style="@style/Widget.CineSound.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/chip_height"
+                android:text="@string/filter_series" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_all"
+                style="@style/Widget.CineSound.Chip"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/chip_height"
+                android:text="@string/filter_all"
+                android:checked="true" />
+
+        </com.google.android.material.chip.ChipGroup>
+
+    </HorizontalScrollView>
+
+    <!-- Subtítulo explicativo das recomendações -->
+    <TextView
+        android:id="@+id/tv_rec_subtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_20"
+        android:layout_marginTop="@dimen/spacing_10"
+        android:text="@string/home_subtitle"
+        android:textSize="12sp"
+        android:textColor="@color/text_hint"
+        android:lineSpacingMultiplier="1.4"
+        app:layout_constraintTop_toBottomOf="@id/scroll_filters"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- =============================================
+         Estado de carregamento (Shimmer / skeleton)
+         Visível enquanto os dados carregam
+         ============================================= -->
+    <include
+        android:id="@+id/include_loading"
+        layout="@layout/layout_loading_skeleton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tv_rec_subtitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="gone" />
+
+    <!-- Estado vazio -->
+    <include
+        android:id="@+id/include_empty"
+        layout="@layout/layout_empty_state"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tv_rec_subtitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- =============================================
+         LISTA: RecyclerView de recomendações
+         item_movie_card.xml para cada título
+         LinearLayoutManager (VERTICAL)
+         ============================================= -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_recommendations"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/spacing_12"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/spacing_16"
+        android:paddingBottom="@dimen/spacing_16"
+        android:scrollbars="none"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/tv_rec_subtitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_movie_card"
+        tools:itemCount="5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

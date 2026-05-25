@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CINESOUND — Menu do BottomNavigationView
+    4 abas: Início, Em Alta, Catálogo, Perfil
+    Ícones: Material Symbols (outline)
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Aba Início: recomendações personalizadas -->
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_nav_home"
+        android:title="@string/nav_home"
+        android:contentDescription="@string/nav_home" />
+
+    <!-- Aba Em Alta: ranking semanal TMDB trending -->
+    <item
+        android:id="@+id/nav_trending"
+        android:icon="@drawable/ic_nav_trending"
+        android:title="@string/nav_trending"
+        android:contentDescription="@string/nav_trending" />
+
+    <!-- Aba Catálogo: todos os títulos com filtros -->
+    <item
+        android:id="@+id/nav_catalog"
+        android:icon="@drawable/ic_nav_catalog"
+        android:title="@string/nav_catalog"
+        android:contentDescription="@string/nav_catalog" />
+
+    <!-- Aba Perfil: informações e histórico do usuário -->
+    <item
+        android:id="@+id/nav_profile"
+        android:icon="@drawable/ic_nav_profile"
+        android:title="@string/nav_profile"
+        android:contentDescription="@string/nav_profile" />
+
+</menu>
