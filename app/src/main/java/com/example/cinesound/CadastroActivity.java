@@ -62,9 +62,9 @@ public class CadastroActivity extends AppCompatActivity {
         firebase.cadastrar(email, senha, resultado -> {
                     String uid = resultado.getUser().getUid();
 
-                    firebase.salvarPerfil(uid, nome, email, ok  -> {
+                    firebase.salvarPerfil(uid, nome, email, ok -> {
 
-                                startActivity(new Intent(this, MainActivity.class));
+                                startActivity(new Intent(CadastroActivity.this, MainActivity.class));
                                 finish();},
 
                             err -> toast("Erro ao salvar perfil"));
