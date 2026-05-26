@@ -1,4 +1,4 @@
-package com.example.cinesound;
+package com.example.cinesound.models;
 
 import com.google.firebase.Timestamp;
 

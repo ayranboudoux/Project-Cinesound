@@ -1,4 +1,4 @@
-package com.example.cinesound;
+package com.example.cinesound.network;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;

@@ -1,4 +1,7 @@
-package com.example.cinesound;
+package com.example.cinesound.network;
+
+import com.example.cinesound.models.DetalheTmdb;
+import com.example.cinesound.models.ResultadoTmdb;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

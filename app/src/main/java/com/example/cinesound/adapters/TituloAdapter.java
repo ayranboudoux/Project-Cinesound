@@ -1,4 +1,4 @@
-package com.example.cinesound;
+package com.example.cinesound.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.example.cinesound.R;
+import com.example.cinesound.models.TituloItem;
+
 import java.util.List;
 
 public class TituloAdapter extends RecyclerView.Adapter<TituloAdapter.ViewHolder> {
