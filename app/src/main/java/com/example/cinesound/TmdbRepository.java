@@ -1,15 +1,16 @@
 package com.example.cinesound;
 
+
 import com.google.firebase.appcheck.interop.BuildConfig;
+
+apiKey = BuildConfig.TMDB_API_KEY;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
-
 public class TmdbRepository {
     private TmdbService service;
     private String apiKey;
@@ -35,37 +36,37 @@ public class TmdbRepository {
         return t;
     }
     // Busca por nome
-    public void buscarPorNome(String nome, Callback<List<TituloItem>> callback) {
+    public void buscarPorNome(String nome,
+                              Callback<List<TituloItem>> callback) {
         service.buscarPorNome(apiKey, nome, IDIOMA, 1)
-                .enqueue(new Callback<ResultadoTmdb>() {
+                .enqueue(new retrofit2.Callback<ResultadoTmdb>() {
                     public void onResponse(Call<ResultadoTmdb> c, Response<ResultadoTmdb> r) {
                         if (r.isSuccessful() && r.body() != null) {
                             List<TituloItem> lista = new ArrayList<>();
-                            for (ItemTmdb i : r.body().ResultadoTmdb)
+                            for (ItemTmdb i : r.body().resultados)
                                 lista.add(converter(i));
-                            callback.getClass(lista);
-                        } else callback.onResponse("Erro na busca");
+                            callback.onSuccess(lista);
+                        } else callback.onError("Erro na busca");
                     }
                     public void onFailure(Call<ResultadoTmdb> c, Throwable t) {
-                        callback.onResponse(t.getMessage());
+                        callback.onError(t.getMessage());
                     }
                 });
     }
     // Trending semanal
     public void buscarTrending(Callback<List<TituloItem>> callback) {
         service.buscarTrending(apiKey, IDIOMA)
-                .enqueue(new Callback<ResultadoTmdb>() {
-                    public void onResponse(Call<ResultadoTmdb> c,
-                                           Response<ResultadoTmdb> r) {
+                .enqueue(new retrofit2.Callback<ResultadoTmdb>() {
+                    public void onResponse(Call<ResultadoTmdb> c, Response<ResultadoTmdb> r) {
                         if (r.isSuccessful() && r.body() != null) {
                             List<TituloItem> lista = new ArrayList<>();
-                            for (ItemTmdb i : r.body().ResultadoTmdb)
+                            for (ItemTmdb i : r.body().resultados)
                                 lista.add(converter(i));
-                            callback.getClass(lista);
-                        } else callback.onResponse("Erro trending");
+                            callback.onSuccess(lista);
+                        } else callback.onError("Erro trending");
                     }
                     public void onFailure(Call<ResultadoTmdb> c, Throwable t) {
-                        callback.onResponse(t.getMessage());
+                        callback.onError(t.getMessage());
                     }
                 });
     }
@@ -82,4 +83,5 @@ public class TmdbRepository {
                     .enqueue(/* mesmo padrão acima */);
         }
     }
+
 }

@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace 'com.example.cinesound'
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
+    buildFeatures {
+        buildConfig = true
     }
+    namespace 'com.example.cinesound'
+
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.example.cinesound"
@@ -17,14 +17,15 @@ android {
         targetSdk 36
         versionCode 1
         versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // ... outras configs ...
-
         buildConfigField "String", "TMDB_API_KEY",
-
                 "\"" + (project.findProperty('TMDB_API_KEY') ?: '') + "\""
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+
     }
 
     buildTypes {
