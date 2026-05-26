@@ -5,15 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class ItemTmdb {
-    public int id;
-    public String titulo;
-    public String nome;
-    public String posterPath;
-    public String mediaType;
-    public List<Integer> generoIds;
-    public double nota;
-
-    public class itemTmdb {
         @SerializedName("id")
         public int id;
         @SerializedName("title")
@@ -33,5 +24,4 @@ public class ItemTmdb {
         @SerializedName("release_date")
         public String dataLancamento;
 
-    }
 }

@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class DetalheTmdb {
-    public class DetalheTmdb {
         @SerializedName("id")
         public int id;
         @SerializedName("title")
@@ -30,5 +29,4 @@ public class DetalheTmdb {
             @SerializedName("name")
             public String nome;
         }
-    }
 }
