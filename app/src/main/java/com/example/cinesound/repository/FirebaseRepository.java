@@ -1,7 +1,6 @@
-package com.example.cinesound;
+package com.example.cinesound.repository;
 
-import android.icu.text.UFormat;
-
+import com.example.cinesound.models.TituloItem;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;

@@ -1,6 +1,12 @@
-package com.example.cinesound;
+package com.example.cinesound.repository;
 
 
+import com.example.cinesound.network.Callback;
+import com.example.cinesound.network.RetrofitClient;
+import com.example.cinesound.network.TmdbService;
+import com.example.cinesound.models.ItemTmdb;
+import com.example.cinesound.models.ResultadoTmdb;
+import com.example.cinesound.models.TituloItem;
 import com.google.firebase.appcheck.interop.BuildConfig;
 
 apiKey = BuildConfig.TMDB_API_KEY;

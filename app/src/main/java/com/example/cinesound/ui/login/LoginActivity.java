@@ -1,4 +1,4 @@
-package com.example.cinesound;
+package com.example.cinesound.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.cinesound.repository.FirebaseRepository;
+import com.example.cinesound.MainActivity;
+import com.example.cinesound.R;
 
 public class LoginActivity extends AppCompatActivity {
 

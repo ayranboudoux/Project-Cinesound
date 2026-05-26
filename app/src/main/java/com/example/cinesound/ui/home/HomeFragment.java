@@ -1,4 +1,4 @@
-package com.example.cinesound;
+package com.example.cinesound.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cinesound.network.Callback;
+import com.example.cinesound.repository.FirebaseRepository;
+import com.example.cinesound.R;
+import com.example.cinesound.adapters.TituloAdapter;
+import com.example.cinesound.models.TituloItem;
+import com.example.cinesound.repository.TmdbRepository;
 import com.google.android.material.chip.Chip;
 
 import java.util.ArrayList;
