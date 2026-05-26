@@ -18,15 +18,15 @@ public class CadastroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_cadastro);
+        setContentView(R.layout.activity_register);
 
         firebase = new FirebaseRepository();
 
-        campoNome = findViewById(R.id.campoNome);
-        campoEmail = findViewById(R.id.campoEmail);
-        campoSenha = findViewById(R.id.campoSenha);
-        campoConfirmar = findViewById(R.id.campoConfirmar);
-        btnCriar = findViewById(R.id.btnCriar);
+        campoNome = findViewById(R.id.et_name);
+        campoEmail = findViewById(R.id.et_email);
+        campoSenha = findViewById(R.id.et_password);
+        campoConfirmar = findViewById(R.id.et_confirm_password);
+        btnCriar = findViewById(R.id.btn_register);
 
         btnCriar.setOnClickListener(v -> fazerCadastro());
 
