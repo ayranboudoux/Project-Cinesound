@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    CINESOUND — TELA: Cadastro de novo usuário
+    Integração: FirebaseAuth.createUserWithEmailAndPassword()
+                Firestore: salva perfil em users/{uid}
+    Layout: ScrollView centralizado, dark theme
+    Campos: Nome · E-mail · Senha · Confirmar Senha
+-->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    tools:context=".ui.auth.RegisterActivity">
+
+    <!-- Botão voltar fixo no topo (fora do scroll) -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_back"
+        style="@style/Widget.Material3.Button.IconButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="@dimen/spacing_16"
+        android:layout_marginTop="@dimen/spacing_16"
+        app:icon="@drawable/ic_arrow_back"
+        app:iconTint="@color/text_primary"
+        app:iconSize="22dp"
+        app:iconGravity="textStart"
+        app:iconPadding="0dp"
+        app:backgroundTint="@color/bg_tertiary"
+        app:cornerRadius="50dp"
+        android:contentDescription="@string/cd_back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/btn_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/spacing_24"
+            android:paddingTop="@dimen/spacing_8"
+            android:paddingBottom="@dimen/spacing_40">
+
+            <!-- =============================================
+                 BLOCO 1: Cabeçalho com logo e título
+                 ============================================= -->
+
+            <!-- Ícone do app -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/logo_icon_container"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="@color/accent"
+                app:cardElevation="0dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_logo_wave"
+                    android:contentDescription="@null"
+                    app:tint="@android:color/white" />
+
+            </androidx.cardview.widget.CardView>
+
+            <!-- Título: Criar conta -->
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_16"
+                android:text="Criar uma conta"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:fontFamily="@font/syne_bold"
+                app:layout_constraintTop_toBottomOf="@id/logo_icon_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- Subtítulo -->
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_6"
+                android:text="Preencha os dados abaixo para começar"
+                android:textSize="13sp"
+                android:textColor="@color/text_secondary"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- =============================================
+                 BLOCO 2: Avatar opcional
+                 Toque para escolher foto da galeria
+                 ============================================= -->
+            <FrameLayout
+                android:id="@+id/avatar_container"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginTop="@dimen/spacing_24"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintTop_toBottomOf="@id/tv_subtitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Círculo do avatar -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="50dp"
+                    app:cardBackgroundColor="@color/bg_tertiary"
+                    app:cardElevation="0dp"
+                    app:strokeWidth="2dp"
+                    app:strokeColor="@color/border_medium">
+
+                    <!-- Foto selecionada (gone por padrão) -->
+                    <ImageView
+                        android:id="@+id/iv_avatar_preview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone"
+                        android:contentDescription="@null" />
+
+                    <!-- Ícone padrão (visível quando sem foto) -->
+                    <ImageView
+                        android:id="@+id/iv_avatar_placeholder"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_photo_camera"
+                        app:tint="@color/text_hint"
+                        android:contentDescription="@null" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Badge "+" no canto inferior direito -->
+                <FrameLayout
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="bottom|end"
+                    android:background="@drawable/bg_avatar_badge">
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_add"
+                        app:tint="@android:color/white"
+                        android:contentDescription="@null" />
+
+                </FrameLayout>
+
+            </FrameLayout>
+
+            <!-- Label do avatar -->
+            <TextView
+                android:id="@+id/tv_avatar_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_6"
+                android:text="Foto de perfil (opcional)"
+                android:textSize="11sp"
+                android:textColor="@color/text_hint"
+                app:layout_constraintTop_toBottomOf="@id/avatar_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- =============================================
+                 BLOCO 3: Formulário
+                 ============================================= -->
+
+            <!-- Campo: Nome completo -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_name"
+                style="@style/Widget.CineSound.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_20"
+                android:hint="Nome completo"
+                app:startIconDrawable="@drawable/ic_person"
+                app:startIconTint="@color/text_hint"
+                app:errorEnabled="true"
+                app:layout_constraintTop_toBottomOf="@id/tv_avatar_hint"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:inputType="textPersonName|textCapWords"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="14sp"
+                    android:imeOptions="actionNext"
+                    android:hint="Seu nome" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo: E-mail -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_email"
+                style="@style/Widget.CineSound.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_12"
+                android:hint="@string/label_email"
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconTint="@color/text_hint"
+                app:errorEnabled="true"
+                app:layout_constraintTop_toBottomOf="@id/til_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:inputType="textEmailAddress"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="14sp"
+                    android:imeOptions="actionNext"
+                    android:hint="@string/hint_email" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Campo: Senha -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_password"
+                style="@style/Widget.CineSound.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_12"
+                android:hint="@string/label_password"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconTint="@color/text_hint"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/text_hint"
+                app:errorEnabled="true"
+                app:helperText="Mínimo 6 caracteres"
+                app:helperTextTextColor="@color/text_hint"
+                app:layout_constraintTop_toBottomOf="@id/til_email"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:inputType="textPassword"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="14sp"
+                    android:imeOptions="actionNext"
+                    android:hint="@string/hint_password" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Indicador de força da senha -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/password_strength_container"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_8"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/til_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="visible">
+
+                <!-- 4 barras de força -->
+                <LinearLayout
+                    android:id="@+id/strength_bars"
+                    android:layout_width="0dp"
+                    android:layout_height="4dp"
+                    android:orientation="horizontal"
+                    android:weightSum="4"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/tv_strength_label">
+
+                    <View android:id="@+id/bar1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="3dp" android:background="@drawable/bg_strength_bar" android:backgroundTint="@color/border_medium"/>
+                    <View android:id="@+id/bar2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="3dp" android:background="@drawable/bg_strength_bar" android:backgroundTint="@color/border_medium"/>
+                    <View android:id="@+id/bar3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginEnd="3dp" android:background="@drawable/bg_strength_bar" android:backgroundTint="@color/border_medium"/>
+                    <View android:id="@+id/bar4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/bg_strength_bar" android:backgroundTint="@color/border_medium"/>
+
+                </LinearLayout>
+
+                <!-- Texto: Fraca / Média / Forte -->
+                <TextView
+                    android:id="@+id/tv_strength_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spacing_8"
+                    android:textSize="11sp"
+                    android:textColor="@color/text_hint"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:text="Fraca" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Campo: Confirmar Senha -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_confirm_password"
+                style="@style/Widget.CineSound.TextInputLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_12"
+                android:hint="Confirmar senha"
+                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconTint="@color/text_hint"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/text_hint"
+                app:errorEnabled="true"
+                app:layout_constraintTop_toBottomOf="@id/password_strength_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_confirm_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/input_height"
+                    android:inputType="textPassword"
+                    android:textColor="@color/text_primary"
+                    android:textColorHint="@color/text_hint"
+                    android:textSize="14sp"
+                    android:imeOptions="actionDone"
+                    android:hint="Repita sua senha" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- =============================================
+                 BLOCO 4: Termos e política de privacidade
+                 ============================================= -->
+            <LinearLayout
+                android:id="@+id/terms_row"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/spacing_16"
+                app:layout_constraintTop_toBottomOf="@id/til_confirm_password"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <!-- Checkbox de aceite -->
+                <com.google.android.material.checkbox.MaterialCheckBox
+                    android:id="@+id/checkbox_terms"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/accent"
+                    android:layout_marginEnd="@dimen/spacing_8" />
+
+                <!-- Texto com spans clicáveis para Termos e Privacidade -->
+                <TextView
+                    android:id="@+id/tv_terms"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Li e aceito os Termos de Serviço e a Política de Privacidade"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"
+                    android:lineSpacingMultiplier="1.4" />
+
+            </LinearLayout>
+
+            <!-- =============================================
+                 BLOCO 5: Botão de cadastro
+                 ============================================= -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_register"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/spacing_20"
+                android:text="Criar conta"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:letterSpacing="0.02"
+                app:backgroundTint="@color/accent"
+                app:cornerRadius="@dimen/radius_medium"
+                app:elevation="0dp"
+                android:enabled="false"
+                app:layout_constraintTop_toBottomOf="@id/terms_row"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!--
+                NOTA: habilite btn_register apenas quando:
+                  - checkbox_terms estiver marcado
+                  - todos os campos forem válidos
+                Exemplo no Kotlin:
+                  checkbox_terms.setOnCheckedChangeListener { _, checked ->
+                      btn_register.isEnabled = checked && formIsValid()
+                  }
+            -->
+
+            <!-- ProgressBar (durante o cadastro) -->
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:visibility="gone"
+                android:indeterminateTint="@color/accent"
+                app:layout_constraintTop_toTopOf="@id/btn_register"
+                app:layout_constraintBottom_toBottomOf="@id/btn_register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <!-- =============================================
+                 BLOCO 6: Feedback de erro geral
+                 (visível quando Firebase retorna erro)
+                 ============================================= -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_12"
+                android:visibility="gone"
+                app:cardBackgroundColor="#1AE8534A"
+                app:cardCornerRadius="@dimen/radius_medium"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#66E8534A"
+                app:layout_constraintTop_toBottomOf="@id/btn_register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/spacing_12"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_error"
+                        app:tint="@color/red_negative"
+                        android:contentDescription="@null" />
+
+                    <TextView
+                        android:id="@+id/tv_error_message"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="@dimen/spacing_10"
+                        android:textSize="13sp"
+                        android:textColor="@color/red_negative"
+                        android:lineSpacingMultiplier="1.4"
+                        tools:text="Este e-mail já está cadastrado." />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- =============================================
+                 BLOCO 7: Link para login
+                 ============================================= -->
+            <LinearLayout
+                android:id="@+id/login_link_row"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/spacing_24"
+                app:layout_constraintTop_toBottomOf="@id/card_error"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Já tem uma conta? "
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/tv_go_to_login"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Entrar"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/accent_light"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:paddingVertical="@dimen/spacing_4" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
