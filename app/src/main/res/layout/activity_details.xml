@@ -191,16 +191,18 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- Metadados: ano · gênero · duração -->
+                <!-- Dividir em 3 telas: ano, genero e duracao -->
+
+                <!-- Linha de estrelas + nota IMDb -->
                 <TextView
                     android:id="@+id/tv_meta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="@color/text_secondary"
                     android:layout_marginBottom="@dimen/spacing_12"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
                     tools:text="2026 · Aventura · 2h" />
 
-                <!-- Linha de estrelas + nota IMDb -->
                 <LinearLayout
                     android:id="@+id/rating_row"
                     android:layout_width="match_parent"
@@ -239,7 +241,7 @@
 
                 <!-- Sinopse -->
                 <TextView
-                    android:id="@+id/tv_synopsis"
+                    android:id="@+id/tv_sinopse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
@@ -252,6 +254,7 @@
 
             <!-- =============================================
                  BLOCO 2: Grid de informações (Gênero, Data, Duração, Classificação)
+                 Separar cada grid de informação.
                  ============================================= -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_info_grid"
