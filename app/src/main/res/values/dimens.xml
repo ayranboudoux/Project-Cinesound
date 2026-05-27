@@ -77,5 +77,6 @@
     <dimen name="cast_item_width">64dp</dimen>
     <dimen name="soundtrack_item_width">80dp</dimen>
     <dimen name="platform_item_width">70dp</dimen>
+    <dimen name="spacing_14">area_de_perfil</dimen>
 
 </resources>

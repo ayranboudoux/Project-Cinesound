@@ -35,7 +35,7 @@
             style="@style/Widget.Material3.Button.IconButton"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:icon="@drawable/ic_arrow_back"
+            app:icon="@drawable/ic_back_search"
             app:iconTint="@color/text_primary"
             app:iconSize="22dp"
             app:iconGravity="textStart"
@@ -73,7 +73,7 @@
                     android:id="@+id/iv_search_icon"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_search"
+                    android:src="@drawable/ic_search1_catalog"
                     app:tint="@color/text_hint"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -106,7 +106,7 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:visibility="gone"
-                    app:icon="@drawable/ic_close"
+                    app:icon="@drawable/ic_close_small"
                     app:iconTint="@color/text_hint"
                     app:iconSize="16dp"
                     app:iconGravity="textStart"
@@ -221,7 +221,7 @@
         <ImageView
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/ic_search"
+            android:src="@drawable/ic_search1_catalog"
             app:tint="@color/text_hint"
             android:alpha="0.4"
             android:contentDescription="@null" />
@@ -262,12 +262,14 @@
         android:scrollbars="none"
         android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_search_result"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:layout_constraintVertical_bias="0.0"
         tools:itemCount="6"
+        tools:listitem="@layout/item_search_result"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

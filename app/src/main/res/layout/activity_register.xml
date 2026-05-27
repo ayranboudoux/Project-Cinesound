@@ -148,7 +148,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_photo_camera"
+                        android:src="@drawable/ic_cam"
                         app:tint="@color/text_hint"
                         android:contentDescription="@null" />
 
@@ -197,8 +197,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_20"
-                android:hint="Nome completo"
-                app:startIconDrawable="@drawable/ic_person"
+                app:startIconDrawable="@drawable/ic_pencil"
                 app:startIconTint="@color/text_hint"
                 app:errorEnabled="true"
                 app:layout_constraintTop_toBottomOf="@id/tv_avatar_hint"
@@ -242,7 +241,7 @@
                     android:textColorHint="@color/text_hint"
                     android:textSize="14sp"
                     android:imeOptions="actionNext"
-                    android:hint="@string/hint_email" />
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -254,7 +253,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_12"
                 android:hint="@string/label_password"
-                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconDrawable="@drawable/ic_key"
                 app:startIconTint="@color/text_hint"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/text_hint"
@@ -274,7 +273,7 @@
                     android:textColorHint="@color/text_hint"
                     android:textSize="14sp"
                     android:imeOptions="actionNext"
-                    android:hint="@string/hint_password" />
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -349,7 +348,7 @@
                     android:textColorHint="@color/text_hint"
                     android:textSize="14sp"
                     android:imeOptions="actionDone"
-                    android:hint="Repita sua senha" />
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 

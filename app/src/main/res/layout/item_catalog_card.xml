@@ -108,7 +108,7 @@
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_play_arrow"
+                        android:src="@drawable/ic_back_search"
                         app:tint="@android:color/white"
                         android:contentDescription="@null" />
 
@@ -160,7 +160,7 @@
                 <ImageView
                     android:layout_width="12dp"
                     android:layout_height="12dp"
-                    android:src="@drawable/ic_star_filled"
+                    android:src="@drawable/ic_star_1_details"
                     app:tint="@color/yellow_star"
                     android:contentDescription="@null"
                     android:layout_marginEnd="@dimen/spacing_4" />
