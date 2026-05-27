@@ -24,6 +24,7 @@
         android:layout_height="@dimen/toolbar_height"
         android:background="@color/bg_primary"
         android:paddingHorizontal="@dimen/spacing_16"
+        android:fontFamily="@font/Syne_Bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -61,7 +62,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:fontFamily="@font/syne_bold"
+                android:fontFamily="@font/Syne_Bold"
                 android:layout_marginStart="@dimen/spacing_8"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -79,6 +80,7 @@
         android:layout_height="@dimen/search_height"
         android:layout_marginHorizontal="@dimen/spacing_16"
         android:layout_marginTop="@dimen/spacing_8"
+        android:fontFamily="@font/Syne_Bold"
         app:cardBackgroundColor="@color/bg_tertiary"
         app:cardCornerRadius="@dimen/radius_medium"
         app:cardElevation="0dp"
@@ -130,7 +132,7 @@
                 android:text="@string/catalog_btn_random"
                 android:textSize="12sp"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"
+                android:fontFamily="@font/Syne_Bold"
                 android:paddingHorizontal="@dimen/spacing_12"
                 app:backgroundTint="@color/accent"
                 app:cornerRadius="@dimen/radius_small"
@@ -154,6 +156,7 @@
         android:orientation="vertical"
         android:layout_marginTop="@dimen/spacing_10"
         android:paddingHorizontal="@dimen/spacing_16"
+        android:fontFamily="@font/Syne_Regular"
         app:layout_constraintTop_toBottomOf="@id/search_bar_container"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -165,12 +168,15 @@
             android:text="@string/filter_tipo"
             android:textSize="11sp"
             android:textColor="@color/text_hint"
-            android:layout_marginBottom="@dimen/spacing_6" />
+            android:fontFamily="@font/Syne_Regular"
+            android:layout_marginBottom="@dimen/spacing_6"
+            />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scrollbars="none"
+            android:fontFamily="@font/Syne_Regular"
             android:layout_marginBottom="@dimen/spacing_10">
 
             <com.google.android.material.chip.ChipGroup

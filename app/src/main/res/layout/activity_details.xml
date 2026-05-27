@@ -135,7 +135,7 @@
                         android:id="@+id/tv_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/syne_bold"
+                        android:fontFamily="@font/Syne-bold"
                         android:textColor="@color/text_primary"
                         android:textSize="22sp"
                         android:textStyle="bold"
@@ -229,7 +229,8 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
                 tools:listitem="@layout/item_info_card"
-                tools:itemCount="4" />
+                tools:itemCount="4"
+                />
 
             <!-- =============================================
                  BLOCO 3: Elenco principal (scroll horizontal)
