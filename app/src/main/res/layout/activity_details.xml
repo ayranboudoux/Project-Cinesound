@@ -61,45 +61,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <!-- Botão voltar -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_back"
-                        style="@style/Widget.Material3.Button.IconButton"
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
-                        app:icon="@drawable/ic_arrow_back"
-                        app:iconTint="@android:color/white"
-                        app:iconSize="20dp"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp"
-                        app:backgroundTint="#66000000"
-                        app:cornerRadius="50dp"
-                        android:contentDescription="@string/cd_back"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent" />
-
-                    <!-- Botão salvar (bookmark) -->
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_bookmark"
-                        style="@style/Widget.Material3.Button.IconButton"
-                        android:layout_width="38dp"
-                        android:layout_height="38dp"
-                        app:icon="@drawable/ic_bookmark"
-                        app:iconTint="@color/yellow_star"
-                        app:iconSize="20dp"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp"
-                        app:backgroundTint="#66000000"
-                        app:cornerRadius="50dp"
-                        android:contentDescription="@string/cd_bookmark"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:layout_height="match_parent"/>
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -172,13 +134,13 @@
                         android:id="@+id/tv_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/syne_bold"
+                        android:textColor="@color/text_primary"
                         android:textSize="22sp"
                         android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:fontFamily="@font/syne_bold"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/space_bookmark"
+                        app:layout_constraintTop_toTopOf="parent"
                         tools:text="The Last Odyssey" />
 
                     <Space
@@ -191,16 +153,18 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <!-- Metadados: ano · gênero · duração -->
+                <!-- Dividir em 3 telas: ano, genero e duracao -->
+
+                <!-- Linha de estrelas + nota IMDb -->
                 <TextView
                     android:id="@+id/tv_meta"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="@color/text_secondary"
                     android:layout_marginBottom="@dimen/spacing_12"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp"
                     tools:text="2026 · Aventura · 2h" />
 
-                <!-- Linha de estrelas + nota IMDb -->
                 <LinearLayout
                     android:id="@+id/rating_row"
                     android:layout_width="match_parent"
@@ -239,7 +203,7 @@
 
                 <!-- Sinopse -->
                 <TextView
-                    android:id="@+id/tv_synopsis"
+                    android:id="@+id/tv_sinopse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
@@ -252,6 +216,7 @@
 
             <!-- =============================================
                  BLOCO 2: Grid de informações (Gênero, Data, Duração, Classificação)
+                 Separar cada grid de informação.
                  ============================================= -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_info_grid"
@@ -422,6 +387,7 @@
                  Amei · Gostei · Não Gostei · Odiei
                  Salvo no Firestore: users/{uid}/ratings/{mediaId}
                  ============================================= -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

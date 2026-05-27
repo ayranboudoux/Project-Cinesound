@@ -62,4 +62,18 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
     implementation 'androidx.recyclerview:recyclerview:1.3.2'
     implementation 'androidx.navigation:navigation-fragment:2.7.6'
+    // Material Design 3
+    implementation("com.google.android.material:material:1.12.0")
+    // ConstraintLayout
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    // Navigation Component (fragments + BottomNav)
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
+    // Glide (carregamento de pôsteres)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    // GridLayout (grade do catálogo)
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
+    // CoordinatorLayout (tela de detalhes)
+    implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
+
 }
