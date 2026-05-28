@@ -18,6 +18,7 @@ import com.example.cinesound.adapters.TituloAdapter;
 import com.example.cinesound.models.TituloItem;
 import com.example.cinesound.network.Callback;
 import com.example.cinesound.repository.TmdbRepository;
+import com.example.cinesound.ui.detalhes.DetalhesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +107,9 @@ public class CatalogoFragment extends Fragment {
         Intent intent = new Intent(getContext(), DetalhesActivity.class);
         intent.putExtra("tmdbId", item.tmdbId);
         intent.putExtra("tipo",   item.tipo);
+        intent.putExtra("titulo", item.titulo);
+        intent.putExtra("poster", item.poster);
+        intent.putExtra("nota",   item.notaTmdb);
         startActivity(intent);
     }
 }
