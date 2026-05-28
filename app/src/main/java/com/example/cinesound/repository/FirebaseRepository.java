@@ -150,4 +150,15 @@ public class FirebaseRepository {
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toList());
     }
+
+    public void buscarClassificacaoDoTitulo(int tmdbId, OnSuccessListener<DocumentSnapshot> onSucesso, OnFailureListener onErro) {
+        String uid   = auth.getCurrentUser().getUid();
+        String docId = uid + "_" + tmdbId;
+
+        db.collection("classificacoes")
+                .document(docId)
+                .get()
+                .addOnSuccessListener(onSucesso)
+                .addOnFailureListener(onErro);
+    }
 }
