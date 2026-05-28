@@ -73,7 +73,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
                 android:letterSpacing="-0.02"
-                android:fontFamily="@font/syne_bold"
+                android:fontFamily="@font/Syne_Bold"
                 app:layout_constraintTop_toBottomOf="@id/logo_icon_container"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -161,51 +161,53 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_password"
                 style="@style/Widget.CineSound.TextInputLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="365dp"
+                android:layout_height="61dp"
                 android:layout_marginTop="@dimen/spacing_12"
                 android:hint="@string/label_password"
-                app:startIconDrawable="@drawable/ic_lock"
-                app:startIconTint="@color/text_hint"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/text_hint"
                 app:errorEnabled="true"
-                app:layout_constraintTop_toBottomOf="@id/til_email"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/til_email"
+                app:startIconDrawable="@drawable/ic_key"
+                app:startIconTint="@color/text_hint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_password"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/input_height"
+                    android:imeOptions="actionDone"
                     android:inputType="textPassword"
                     android:textColor="@color/text_primary"
                     android:textColorHint="@color/text_hint"
-                    android:textSize="14sp"
-                    android:imeOptions="actionDone"
-                    android:hint="@string/hint_password" />
+                    android:textSize="14sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Link: esqueci minha senha -->
-            <TextView
-                android:id="@+id/tv_forgot_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/link_forgot_password"
-                android:textSize="13sp"
-                android:textColor="@color/accent_light"
-                android:paddingVertical="@dimen/spacing_8"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground"
-                app:layout_constraintTop_toBottomOf="@id/til_password"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/spacing_4" />
 
             <!-- =============================================
                  BLOCO 4: Botão de login
                  ============================================= -->
+
+            <TextView
+                android:id="@+id/tv_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="120dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingVertical="@dimen/spacing_8"
+                android:text="@string/link_forgot_password"
+                android:textColor="@color/accent_light"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_password" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_login"
                 android:layout_width="0dp"

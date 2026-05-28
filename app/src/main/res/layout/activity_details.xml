@@ -59,10 +59,11 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
             </androidx.appcompat.widget.Toolbar>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -134,7 +135,7 @@
                         android:id="@+id/tv_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/syne_bold"
+                        android:fontFamily="@font/Syne-bold"
                         android:textColor="@color/text_primary"
                         android:textSize="22sp"
                         android:textStyle="bold"
@@ -174,11 +175,11 @@
                     android:layout_marginBottom="@dimen/spacing_12">
 
                     <!-- 5 estrelas (ajustadas via código) -->
-                    <ImageView android:id="@+id/star1" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_filled" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
-                    <ImageView android:id="@+id/star2" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_filled" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
-                    <ImageView android:id="@+id/star3" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_filled" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
-                    <ImageView android:id="@+id/star4" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_filled" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
-                    <ImageView android:id="@+id/star5" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_outline" app:tint="@color/bg_tertiary" android:contentDescription="@null" android:layout_marginEnd="@dimen/spacing_8"/>
+                    <ImageView android:id="@+id/star1" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_2_details" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
+                    <ImageView android:id="@+id/star2" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_2_details" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
+                    <ImageView android:id="@+id/star3" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_2_details" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
+                    <ImageView android:id="@+id/star4" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_2_details" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="2dp"/>
+                    <ImageView android:id="@+id/star5" android:layout_width="18dp" android:layout_height="18dp" android:src="@drawable/ic_star_2_details" app:tint="@color/yellow_star" android:contentDescription="@null" android:layout_marginEnd="@dimen/spacing_8"/>
 
                     <TextView
                         android:id="@+id/tv_rating"
@@ -228,7 +229,8 @@
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
                 tools:listitem="@layout/item_info_card"
-                tools:itemCount="4" />
+                tools:itemCount="4"
+                />
 
             <!-- =============================================
                  BLOCO 3: Elenco principal (scroll horizontal)

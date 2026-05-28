@@ -89,7 +89,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:fontFamily="@font/syne_bold"
+                android:fontFamily="@font/Syne_Bold"
                 app:layout_constraintTop_toBottomOf="@id/logo_icon_container"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -104,6 +104,7 @@
                 android:textSize="13sp"
                 android:textColor="@color/text_secondary"
                 android:gravity="center"
+                android:fontFamily="@font/Syne_Regular"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -148,7 +149,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_gravity="center"
-                        android:src="@drawable/ic_photo_camera"
+                        android:src="@drawable/ic_cam"
                         app:tint="@color/text_hint"
                         android:contentDescription="@null" />
 
@@ -197,8 +198,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_20"
-                android:hint="Nome completo"
-                app:startIconDrawable="@drawable/ic_person"
+                app:startIconDrawable="@drawable/ic_pencil"
                 app:startIconTint="@color/text_hint"
                 app:errorEnabled="true"
                 app:layout_constraintTop_toBottomOf="@id/tv_avatar_hint"
@@ -212,6 +212,7 @@
                     android:inputType="textPersonName|textCapWords"
                     android:textColor="@color/text_primary"
                     android:textColorHint="@color/text_hint"
+                    android:fontFamily="@font/Syne_Regular"
                     android:textSize="14sp"
                     android:imeOptions="actionNext"
                     android:hint="Seu nome" />
@@ -239,10 +240,11 @@
                     android:layout_height="@dimen/input_height"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/text_primary"
+                    android:fontFamily="@font/Syne_Regular"
                     android:textColorHint="@color/text_hint"
                     android:textSize="14sp"
                     android:imeOptions="actionNext"
-                    android:hint="@string/hint_email" />
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -253,8 +255,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_12"
+                android:fontFamily="@font/Syne_Regular"
                 android:hint="@string/label_password"
-                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconDrawable="@drawable/ic_key"
                 app:startIconTint="@color/text_hint"
                 app:endIconMode="password_toggle"
                 app:endIconTint="@color/text_hint"
@@ -271,10 +274,11 @@
                     android:layout_height="@dimen/input_height"
                     android:inputType="textPassword"
                     android:textColor="@color/text_primary"
+                    android:fontFamily="@font/Syne_Regular"
                     android:textColorHint="@color/text_hint"
                     android:textSize="14sp"
                     android:imeOptions="actionNext"
-                    android:hint="@string/hint_password" />
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -347,9 +351,10 @@
                     android:inputType="textPassword"
                     android:textColor="@color/text_primary"
                     android:textColorHint="@color/text_hint"
+                    android:fontFamily="@font/Syne_Regular"
                     android:textSize="14sp"
                     android:imeOptions="actionDone"
-                    android:hint="Repita sua senha" />
+                    />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -383,6 +388,7 @@
                     android:layout_weight="1"
                     android:text="Li e aceito os Termos de Serviço e a Política de Privacidade"
                     android:textSize="12sp"
+                    android:fontFamily="@font/Syne_Regular"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingMultiplier="1.4" />
 
@@ -400,6 +406,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
+                android:fontFamily="@font/Syne_Bold"
                 android:letterSpacing="0.02"
                 app:backgroundTint="@color/accent"
                 app:cornerRadius="@dimen/radius_medium"
@@ -498,8 +505,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Já tem uma conta? "
+                    android:fontFamily="@font/Syne_Regular"
                     android:textSize="14sp"
-                    android:textColor="@color/text_secondary" />
+                    android:textColor="@color/text_secondary"
+                    />
 
                 <TextView
                     android:id="@+id/tv_go_to_login"
@@ -509,6 +518,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/accent_light"
+                    android:fontFamily="@font/Syne_Bold"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackground"

@@ -51,7 +51,7 @@
                 style="@style/Widget.Material3.Button.IconButton"
                 android:layout_width="@dimen/icon_btn_size"
                 android:layout_height="@dimen/icon_btn_size"
-                app:icon="@drawable/ic_search"
+                app:icon="@drawable/ic_back_forgot_password"
                 app:iconTint="@color/text_secondary"
                 app:iconSize="20dp"
                 app:iconGravity="textStart"
