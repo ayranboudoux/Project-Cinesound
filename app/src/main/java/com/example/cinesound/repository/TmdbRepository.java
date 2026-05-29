@@ -1,15 +1,13 @@
 package com.example.cinesound.repository;
 
 
+import com.example.cinesound.BuildConfig;
 import com.example.cinesound.network.Callback;
 import com.example.cinesound.network.RetrofitClient;
 import com.example.cinesound.network.TmdbService;
 import com.example.cinesound.models.ItemTmdb;
 import com.example.cinesound.models.ResultadoTmdb;
 import com.example.cinesound.models.TituloItem;
-import com.google.firebase.appcheck.interop.BuildConfig;
-
-apiKey = BuildConfig.TMDB_API_KEY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,12 +80,102 @@ public class TmdbRepository {
         String ids = generoIds.stream()
                 .map(String::valueOf).collect(Collectors.joining(","));
         if ("serie".equals(tipo)) {
-            service.buscarSeries(apiKey, IDIOMA, "popularity.desc", ids, null, null, 1)
-                    .enqueue(/* mesmo padrão acima */);
+
+            service.buscarSeries(apiKey, IDIOMA,
+                            "popularity.desc",
+                            ids,
+                            null,
+                            null,
+                            1)
+
+                    .enqueue(new retrofit2.Callback<ResultadoTmdb>() {
+
+                        @Override
+                        public void onResponse(Call<ResultadoTmdb> call,
+                                               Response<ResultadoTmdb> response) {
+
+                            if (response.isSuccessful() && response.body() != null) {
+
+                                List<TituloItem> lista = new ArrayList<>();
+
+                                for (ItemTmdb i : response.body().resultados) {
+                                    lista.add(converter(i));
+                                }
+
+                                callback.onSuccess(lista);
+
+                            } else {
+                                callback.onError("Erro ao buscar séries");
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResultadoTmdb> call,
+                                              Throwable t) {
+
+                            callback.onError(t.getMessage());
+                        }
+                    });
+
         } else {
-            service.buscarFilmes(apiKey, IDIOMA, "popularity.desc", ids, null, null, 1)
-                    .enqueue(/* mesmo padrão acima */);
+            service.buscarFilmes(apiKey, IDIOMA,
+                            "popularity.desc",
+                            ids,
+                            null,
+                            null,
+                            1)
+                    .enqueue(new retrofit2.Callback<ResultadoTmdb>() {
+
+                        @Override
+                        public void onResponse(Call<ResultadoTmdb> call,
+                                               Response<ResultadoTmdb> response) {
+
+                            if (response.isSuccessful() && response.body() != null) {
+
+                                List<TituloItem> lista = new ArrayList<>();
+
+                                for (ItemTmdb i : response.body().resultados) {
+                                    lista.add(converter(i));
+                                }
+
+                                callback.onSuccess(lista);
+
+                            } else {
+                                callback.onError("Erro ao buscar filmes");
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<ResultadoTmdb> call,
+                                              Throwable t) {
+                            callback.onError(t.getMessage());
+                        }
+                    });
         }
+    }
+    // Catálogo com filtros (chamado pelo CatalogoFragment)
+    public void buscarFilmes(String query, String tipo, String ordenacao,
+                             List<Integer> generoIds, Integer ano,
+                             Double notaMinima, int pagina,
+                             Callback<List<TituloItem>> callback) {
+
+        String ids = (generoIds != null && !generoIds.isEmpty())
+                ? generoIds.stream().map(String::valueOf).collect(Collectors.joining(","))
+                : null;
+
+        service.buscarFilmes(apiKey, IDIOMA, ordenacao, ids, ano, notaMinima, pagina)
+                .enqueue(new retrofit2.Callback<ResultadoTmdb>() {
+                    public void onResponse(Call<ResultadoTmdb> c, Response<ResultadoTmdb> r) {
+                        if (r.isSuccessful() && r.body() != null) {
+                            List<TituloItem> lista = new ArrayList<>();
+                            for (ItemTmdb i : r.body().resultados)
+                                lista.add(converter(i));
+                            callback.onSuccess(lista);
+                        } else callback.onError("Erro no catálogo");
+                    }
+                    public void onFailure(Call<ResultadoTmdb> c, Throwable t) {
+                        callback.onError(t.getMessage());
+                    }
+                });
     }
 
 }
