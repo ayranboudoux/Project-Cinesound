@@ -162,7 +162,10 @@ public class SearchActivity extends AppCompatActivity {
     private void abrirDetalhes(TituloItem item) {
         Intent intent = new Intent(this, DetalhesActivity.class);
         intent.putExtra("tmdbId", item.tmdbId);
-        intent.putExtra("tipo", item.tipo);
+        intent.putExtra("tipo",   item.tipo);
+        intent.putExtra("titulo", item.titulo);
+        intent.putExtra("poster", item.poster);
+        intent.putExtra("nota",   item.notaTmdb);
         startActivity(intent);
     }
 }

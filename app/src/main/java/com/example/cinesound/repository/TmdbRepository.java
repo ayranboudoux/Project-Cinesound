@@ -30,7 +30,7 @@ public class TmdbRepository {
 
     public TmdbRepository() {
         service = RetrofitClient.getClient().create(TmdbService.class);
-        apiKey  = BuildConfig.TMDB_API_KEY;
+        apiKey  = "chave da api aqui";
     }
 
     // Converte um item da TMDB para o TituloItem compartilhado

@@ -16,6 +16,7 @@ import com.example.cinesound.models.TituloItem;
 import com.example.cinesound.network.Callback;
 import com.example.cinesound.repository.FirebaseRepository;
 import com.example.cinesound.repository.TmdbRepository;
+import com.example.cinesound.ui.busca.SearchActivity;
 import com.example.cinesound.ui.detalhes.DetalhesActivity;
 import com.google.android.material.chip.Chip;
 
@@ -46,6 +47,11 @@ public class HomeFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         configurarFiltros();
+
+        view.findViewById(R.id.btn_search).setOnClickListener(v -> {
+            startActivity(new Intent(getContext(), SearchActivity.class));
+        });
+
         carregarRecomendacoes();
 
         return view;

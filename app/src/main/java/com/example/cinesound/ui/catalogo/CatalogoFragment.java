@@ -30,6 +30,9 @@ public class CatalogoFragment extends Fragment {
     private TmdbRepository tmdb;
     private TituloAdapter adapter;
     private List<TituloItem> listaCompleta = new ArrayList<>();
+    private com.google.android.material.chip.ChipGroup chipGroupType, chipGroupGenre, chipGroupSort;
+    private static final int[] GENRE_IDS = { 28, 18, 878, 27, 35, 16, 80 }; // action, drama, sci-fi, horror, comedy, animation, crime
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,7 +46,12 @@ public class CatalogoFragment extends Fragment {
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
 
         configurarBusca();
-        carregarCatalogo();
+
+        chipGroupType  = view.findViewById(R.id.chip_group_type);
+        chipGroupGenre = view.findViewById(R.id.chip_group_genre);
+        chipGroupSort  = view.findViewById(R.id.chip_group_sort);
+        configurarFiltros();
+        aplicarFiltros();
 
         return view;
     }
@@ -73,17 +81,6 @@ public class CatalogoFragment extends Fragment {
         atualizarRecycler(filtrada);
     }
 
-    private void carregarCatalogo() {
-        tmdb.buscarFilmes("popularity.desc", null, null, null,
-                new Callback<List<TituloItem>>() {
-                    @Override public void onSuccess(List<TituloItem> lista) {
-                        listaCompleta = lista;
-                        atualizarRecycler(lista);
-                    }
-                    @Override public void onError(String msg) {}
-                });
-    }
-
     private void atualizarRecycler(List<TituloItem> lista) {
         adapter = new TituloAdapter(lista, this::abrirDetalhes);
         recyclerView.setAdapter(adapter);
@@ -97,5 +94,106 @@ public class CatalogoFragment extends Fragment {
         intent.putExtra("poster", item.poster);
         intent.putExtra("nota",   item.notaTmdb);
         startActivity(intent);
+    }
+
+    private void configurarFiltros() {
+
+        chipGroupType.setOnCheckedChangeListener(
+                (group, checkedId) -> aplicarFiltros()
+        );
+
+        chipGroupSort.setOnCheckedChangeListener(
+                (group, checkedId) -> aplicarFiltros()
+        );
+
+        int[] genreChipIds = {
+                R.id.chip_genre_action,
+                R.id.chip_genre_drama,
+                R.id.chip_genre_scifi,
+                R.id.chip_genre_horror,
+                R.id.chip_genre_comedy,
+                R.id.chip_genre_animation,
+                R.id.chip_genre_crime
+        };
+
+        for (int chipId : genreChipIds) {
+
+            com.google.android.material.chip.Chip chip =
+                    chipGroupGenre.findViewById(chipId);
+
+            if (chip != null) {
+
+                chip.setOnCheckedChangeListener(
+                        (buttonView, isChecked) -> aplicarFiltros()
+                );
+            }
+        }
+    }
+
+    private void aplicarFiltros() {
+        // Tipo
+        int typeId = chipGroupType.getCheckedChipId();
+        String tipo;
+        if (typeId == R.id.chip_type_series) tipo = "serie";
+        else if (typeId == R.id.chip_type_all || typeId == R.id.chip_type_anime) tipo = "todos";
+        else tipo = "filme"; // chip_type_movies (default)
+
+        // Gênero — pega todos os chips marcados
+        List<Integer> generoIds = new ArrayList<>();
+        int[] chipIds = {R.id.chip_genre_action, R.id.chip_genre_drama, R.id.chip_genre_scifi,
+                R.id.chip_genre_horror, R.id.chip_genre_comedy,
+                R.id.chip_genre_animation, R.id.chip_genre_crime};
+
+        for (int i = 0; i < chipIds.length; i++) {
+            com.google.android.material.chip.Chip chip =
+                    chipGroupGenre.findViewById(chipIds[i]);
+            if (chip != null && chip.isChecked()) {
+                generoIds.add(GENRE_IDS[i]);
+            }
+        }
+        String generosParam = generoIds.isEmpty() ? null :
+                generoIds.stream().map(String::valueOf).collect(java.util.stream.Collectors.joining(","));
+
+        // Ordenação
+        int sortId = chipGroupSort.getCheckedChipId();
+        String ordenacao;
+        if (sortId == R.id.chip_sort_rating)   ordenacao = "vote_average.desc";
+        else if (sortId == R.id.chip_sort_newest) ordenacao = "primary_release_date.desc";
+        else if (sortId == R.id.chip_sort_popular) ordenacao = "popularity.desc";
+        else ordenacao = "original_title.asc"; // A-Z
+
+        Callback<List<TituloItem>> cb = new Callback<List<TituloItem>>() {
+            @Override public void onSuccess(List<TituloItem> lista) {
+                listaCompleta = lista;
+                atualizarRecycler(lista);
+            }
+            @Override public void onError(String msg) {}
+        };
+
+        if ("serie".equals(tipo)) {
+
+            tmdb.buscarSeries(
+                    ordenacao,
+                    generosParam,
+                    null,
+                    null,
+                    cb
+            );
+
+        } else if ("filme".equals(tipo)) {
+
+            tmdb.buscarFilmes(
+                    ordenacao,
+                    generosParam,
+                    null,
+                    null,
+                    cb
+            );
+
+        } else {
+
+            tmdb.buscarTrending(cb);
+
+        }
     }
 }
