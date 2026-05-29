@@ -1,320 +1,213 @@
 package com.example.cinesound.ui.detalhes;
 
+import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.Button;
+import android.view.View;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.cinesound.R;
 import com.example.cinesound.models.TituloItem;
 import com.example.cinesound.repository.FirebaseRepository;
 import com.example.cinesound.repository.TmdbRepository;
+import com.google.android.material.button.MaterialButton;
 
 public class DetalhesActivity extends AppCompatActivity {
-    private ImageView imgPoster;
-    private TextView txtTitulo, txtSinopse, txtGenero;
-    private TextView txtDuracao, txtAno, txtClassificacao;
-    private RatingBar ratingBar;
-    private TextView    txtNota, txtVotos;
-    private RecyclerView recyclerElenco, recyclerTrilha, recyclerOnde;
-    private Button btnAmei, btnGostei, btnNaoGostei, btnOdiei;
+
+    // Views
+    private ImageView ivPoster, ivBanner;
+    private ImageView star1, star2, star3, star4, star5;
+    private TextView tvTitle, tvMeta, tvSinopse, tvRating, tvVotes;
+    private RecyclerView rvCast, rvSoundtrack, rvPlatforms, rvInfoGrid;
+    private MaterialButton btnAmei, btnGostei, btnNaoGostei, btnOdiei;
+
+    // Repositórios
     private FirebaseRepository firebase;
     private TmdbRepository tmdb;
-    private TituloItem tituloAtual;
-    private int tmdbId;
-    private String tipo;
 
+    // Dados
+    private TituloItem tituloAtual;
+    private String classificacaoAtual = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_detalhes);
+        setContentView(R.layout.activity_details);
 
         firebase = new FirebaseRepository();
-        tmdb = new TmdbRepository();
-
-        tmdbId = getIntent().getIntExtra("tmdbId", 0);
-        tipo   = getIntent().getStringExtra("tipo");
-
+        tmdb     = new TmdbRepository();
 
         vincularComponentes();
-        configurarBotoesClassificacao();
-        carregarDetalhes();
-        verificarClassificacaoExistente();
-    }
 
+        // Monta o TituloItem com os dados que vieram do Intent
+        tituloAtual          = new TituloItem();
+        tituloAtual.tmdbId   = getIntent().getIntExtra("tmdbId", 0);
+        tituloAtual.tipo     = getIntent().getStringExtra("tipo");
+        tituloAtual.titulo   = getIntent().getStringExtra("titulo");
+        tituloAtual.poster   = getIntent().getStringExtra("poster");
+        tituloAtual.notaTmdb = getIntent().getDoubleExtra("nota", 0.0);
+
+        preencherDadosBasicos();
+        configurarBotoesClassificacao();
+        verificarClassificacaoExistente();
+
+        // DEPENDE DO RAYAN — descomentar quando os métodos existirem
+        // carregarElenco();
+        // carregarOndeAssistir();
+        // carregarTrilha();
+    }
 
     private void vincularComponentes() {
-
-        imgPoster = findViewById(R.id.iv_poster);
-        txtTitulo = findViewById(R.id.tv_title);
-        txtSinopse = findViewById(R.id.tv_sinopse);
-        txtGenero = findViewById(R.id.tv_genero);
-        txtDuracao = findViewById(R.id.tv_duracao);
-        txtAno = findViewById(R.id.tv_ano);
-        ratingBar = findViewById(R.id.ratingBar);
-        txtNota = findViewById(R.id.txtNota);
-        txtVotos = findViewById(R.id.txtVotos);
-        recyclerElenco = findViewById(R.id.recyclerElenco);
-        recyclerTrilha = findViewById(R.id.recyclerTrilha);
-        recyclerOnde = findViewById(R.id.recyclerOnde);
-        btnAmei = findViewById(R.id.btn_amei);
-        btnGostei = findViewById(R.id.btn_gostei);
+        ivPoster     = findViewById(R.id.iv_poster);
+        ivBanner     = findViewById(R.id.iv_banner);
+        tvTitle      = findViewById(R.id.tv_title);
+        tvMeta       = findViewById(R.id.tv_meta);
+        tvSinopse    = findViewById(R.id.tv_sinopse);
+        tvRating     = findViewById(R.id.tv_rating);
+        tvVotes      = findViewById(R.id.tv_votes);
+        star1        = findViewById(R.id.star1);
+        star2        = findViewById(R.id.star2);
+        star3        = findViewById(R.id.star3);
+        star4        = findViewById(R.id.star4);
+        star5        = findViewById(R.id.star5);
+        rvCast       = findViewById(R.id.rv_cast);
+        rvSoundtrack = findViewById(R.id.rv_soundtrack);
+        rvPlatforms  = findViewById(R.id.rv_platforms);
+        rvInfoGrid   = findViewById(R.id.rv_info_grid);
+        btnAmei      = findViewById(R.id.btn_amei);
+        btnGostei    = findViewById(R.id.btn_gostei);
         btnNaoGostei = findViewById(R.id.btn_nao_gostei);
-        btnOdiei = findViewById(R.id.btn_odiei);
+        btnOdiei     = findViewById(R.id.btn_odiei);
     }
 
+    private void preencherDadosBasicos() {
+        tvTitle.setText(tituloAtual.titulo);
+        tvMeta.setText(tituloAtual.tipo.equals("filme") ? "Filme" : "Série");
+        tvRating.setText(String.format("%.1f", tituloAtual.notaTmdb));
+        tvVotes.setText("IMDb");
 
+        exibirEstrelas(tituloAtual.notaTmdb);
 
-    private void carregarDetalhes() {
+        // Pôster
+        if (tituloAtual.poster != null && !tituloAtual.poster.isEmpty()) {
+            Glide.with(this).load(tituloAtual.poster).into(ivPoster);
+            Glide.with(this).load(tituloAtual.poster).into(ivBanner);
+        }
+    }
 
-        tmdb.buscarDetalhes(tmdbId, tipo, new Callback<DetalheTmdb>() {
+    private void exibirEstrelas(double notaTmdb) {
+        int estrelas = (int) Math.round(notaTmdb / 2);
 
-            public void onSuccess(DetalheTmdb d) {
+        ImageView[] stars = { star1, star2, star3, star4, star5 };
 
-                // Monta o TituloItem pra poder classificar depois
-
-                tituloAtual = new TituloItem();
-
-                tituloAtual.tmdbId  = d.id;
-
-                tituloAtual.titulo  = d.titulo != null ? d.titulo : d.nome;
-
-                tituloAtual.tipo    = tipo;
-
-                tituloAtual.notaTmdb= d.nota;
-
-
-
-                // Preenche a tela
-
-                txtTitulo.setText(tituloAtual.titulo);
-
-                txtSinopse.setText(d.sinopse);
-
-                txtAno.setText(d.dataLancamento != null
-
-                        ? d.dataLancamento.substring(0,4) : "");
-
-                txtDuracao.setText(d.duracao + " min");
-
-                ratingBar.setRating((float)(d.nota / 2));
-
-                txtNota.setText(String.format("%.1f", d.nota));
-
-
-
-                // Gêneros
-
-                if (d.generos != null && !d.generos.isEmpty()) {
-
-                    StringBuilder sb = new StringBuilder();
-
-                    for (DetalheTmdb.GeneroPar g : d.generos)
-
-                        sb.append(g.nome).append(", ");
-
-                    txtGenero.setText(sb.toString()
-
-                            .replaceAll(", $", ""));
-
-                }
-
-
-
-                // Pôster
-
-                Glide.with(DetalhesActivity.this)
-
-                        .load("https://image.tmdb.org/t/p/w500"
-
-                                + d.posterPath)
-
-                        .into(imgPoster);
-
-
-
-                carregarElenco();
-
-                carregarOndeAssistir();
-
-                carregarTrilha();
-
+        for (int i = 0; i < 5; i++) {
+            if (i < estrelas) {
+                stars[i].setImageResource(R.drawable.ic_star_1_details);
+                stars[i].setColorFilter(getResources().getColor(R.color.yellow_star, null));
+            } else {
+                stars[i].setImageResource(R.drawable.ic_star_2_details);
+                stars[i].setColorFilter(getResources().getColor(R.color.bg_tertiary, null));
             }
-
-            public void onError(String msg) {}
-
-        });
-
+        }
     }
-
-
-
-    private void carregarElenco() {
-
-        tmdb.buscarElenco(tmdbId, new Callback<List<MembroElenco>>() {
-
-            public void onSuccess(List<MembroElenco> lista) {
-
-                recyclerElenco.setLayoutManager(
-
-                        new LinearLayoutManager(DetalhesActivity.this,
-
-                                LinearLayoutManager.HORIZONTAL, false));
-
-                recyclerElenco.setAdapter(new ElencoAdapter(lista));
-
-            }
-
-            public void onError(String msg) {}
-
-        });
-
-    }
-
-
-
-    private void carregarOndeAssistir() {
-
-        tmdb.buscarOndeAssistir(tmdbId, new Callback<List<Provedor>>() {
-
-            public void onSuccess(List<Provedor> lista) {
-
-                recyclerOnde.setLayoutManager(
-
-                        new LinearLayoutManager(DetalhesActivity.this,
-
-                                LinearLayoutManager.HORIZONTAL, false));
-
-                recyclerOnde.setAdapter(new ProvedorAdapter(lista));
-
-            }
-
-            public void onError(String msg) {}
-
-        });
-
-    }
-
-
-
-    private void carregarTrilha() {
-
-        tmdb.buscarVideos(tmdbId, new Callback<List<Video>>() {
-
-            public void onSuccess(List<Video> lista) {
-
-                recyclerTrilha.setLayoutManager(
-
-                        new LinearLayoutManager(DetalhesActivity.this,
-
-                                LinearLayoutManager.HORIZONTAL, false));
-
-                recyclerTrilha.setAdapter(new VideoAdapter(lista));
-
-            }
-
-            public void onError(String msg) {}
-
-        });
-
-    }
-
-
-
-    // Verifica se o usuário já classificou esse título
-
-    private void verificarClassificacaoExistente() {
-
-        firebase.buscarClassificacaoDoTitulo(tmdbId,
-
-                doc -> {
-
-                    if (doc.exists()) {
-
-                        String cl = doc.getString("classificacao");
-
-                        destacarBotao(cl);
-
-                    }
-
-                }, err -> {}),
-
-        );
-
-    }
-
-
 
     private void configurarBotoesClassificacao() {
+        btnAmei.setTag("amei");
+        btnGostei.setTag("gostei");
+        btnNaoGostei.setTag("nao_gostei");
+        btnOdiei.setTag("odiei");
 
-        btnAmei.setOnClickListener(v      -> classificar("amei"));
+        View.OnClickListener listener = v -> {
+            String classificacao = (String) v.getTag();
+            classificacaoAtual = classificacao;
+            destacarBotao(classificacao);
+            salvarClassificacao(classificacao);
+        };
 
-        btnGostei.setOnClickListener(v    -> classificar("gostei"));
-
-        btnNaoGostei.setOnClickListener(v -> classificar("nao_gostei"));
-
-        btnOdiei.setOnClickListener(v     -> classificar("odiei"));
-
+        btnAmei.setOnClickListener(listener);
+        btnGostei.setOnClickListener(listener);
+        btnNaoGostei.setOnClickListener(listener);
+        btnOdiei.setOnClickListener(listener);
     }
 
+    private void destacarBotao(String selecionado) {
+        MaterialButton[] botoes = { btnAmei, btnGostei, btnNaoGostei, btnOdiei };
 
-
-    private void classificar(String valor) {
-
-        if (tituloAtual == null) return;
-
-        firebase.salvarClassificacao(tituloAtual, valor,
-
-                ok  -> destacarBotao(valor),
-
-                err -> Toast.makeText(this, "Erro ao salvar",
-
-                        Toast.LENGTH_SHORT).show()
-
-        );
-
-    }
-
-
-
-    // Destaca o botão selecionado e apaga os outros
-
-    private void destacarBotao(String classificacao) {
-
-        resetarBotoes();
-
-        switch (classificacao) {
-
-            case "amei":      btnAmei.setAlpha(1f);     break;
-
-            case "gostei":    btnGostei.setAlpha(1f);   break;
-
-            case "nao_gostei":btnNaoGostei.setAlpha(1f);break;
-
-            case "odiei":     btnOdiei.setAlpha(1f);    break;
-
+        for (MaterialButton btn : botoes) {
+            if (btn.getTag().equals(selecionado)) {
+                btn.setBackgroundColor(getResources().getColor(R.color.accent, null));
+                btn.setTextColor(getResources().getColor(R.color.text_primary, null));
+            } else {
+                btn.setBackgroundColor(Color.TRANSPARENT);
+                btn.setTextColor(getResources().getColor(R.color.text_secondary, null));
+            }
         }
-
     }
 
-
-
-    private void resetarBotoes() {
-
-        btnAmei.setAlpha(0.4f);
-
-        btnGostei.setAlpha(0.4f);
-
-        btnNaoGostei.setAlpha(0.4f);
-
-        btnOdiei.setAlpha(0.4f);
-
+    private void salvarClassificacao(String classificacao) {
+        firebase.salvarClassificacao(tituloAtual, classificacao,
+                unused -> { /* sucesso, botão já destacado */ },
+                e -> Toast.makeText(this, "Erro ao salvar classificação",
+                        Toast.LENGTH_SHORT).show()
+        );
     }
 
+    private void verificarClassificacaoExistente() {
+        firebase.buscarClassificacoes(
+                snapshot -> {
+                    snapshot.getDocuments().forEach(doc -> {
+                        if (doc.getLong("tmdbId") != null &&
+                                doc.getLong("tmdbId").intValue() == tituloAtual.tmdbId) {
+                            String cl = doc.getString("classificacao");
+                            if (cl != null) destacarBotao(cl);
+                        }
+                    });
+                },
+                err -> { /* silencioso */ }
+        );
+    }
+
+    // =============================================
+    // DEPENDE DO RAYAN — descomentar quando pronto
+    // =============================================
+
+    // private void carregarElenco() {
+    //     tmdb.buscarElenco(tituloAtual.tmdbId, new Callback<List<MembroElenco>>() {
+    //         public void onSuccess(List<MembroElenco> lista) {
+    //             rvCast.setLayoutManager(new LinearLayoutManager(
+    //                     DetalhesActivity.this, LinearLayoutManager.HORIZONTAL, false));
+    //             rvCast.setAdapter(new ElencoAdapter(lista));
+    //         }
+    //         public void onError(String msg) {}
+    //     });
+    // }
+
+    // private void carregarOndeAssistir() {
+    //     tmdb.buscarOndeAssistir(tituloAtual.tmdbId, new Callback<List<Provedor>>() {
+    //         public void onSuccess(List<Provedor> lista) {
+    //             rvPlatforms.setLayoutManager(new LinearLayoutManager(
+    //                     DetalhesActivity.this, LinearLayoutManager.HORIZONTAL, false));
+    //             rvPlatforms.setAdapter(new ProvedorAdapter(lista));
+    //         }
+    //         public void onError(String msg) {}
+    //     });
+    // }
+
+    // private void carregarTrilha() {
+    //     tmdb.buscarVideos(tituloAtual.tmdbId, new Callback<List<Video>>() {
+    //         public void onSuccess(List<Video> lista) {
+    //             rvSoundtrack.setLayoutManager(new LinearLayoutManager(
+    //                     DetalhesActivity.this, LinearLayoutManager.HORIZONTAL, false));
+    //             rvSoundtrack.setAdapter(new VideoAdapter(lista));
+    //         }
+    //         public void onError(String msg) {}
+    //     });
+    // }
 }

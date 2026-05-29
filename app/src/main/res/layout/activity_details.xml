@@ -406,95 +406,55 @@
                     android:textStyle="bold"
                     android:textColor="@color/text_primary" />
 
-                <!-- Grade 2x2 de botões de classificação -->
-                <androidx.gridlayout.widget.GridLayout
+                <!-- Botões de classificação do usuário -->
+                <LinearLayout
+                    android:id="@+id/classification_row"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:columnCount="2"
-                    android:rowCount="2"
-                    android:useDefaultMargins="false">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/spacing_12"
+                    android:layout_marginBottom="@dimen/spacing_12">
 
-                    <!-- Amei -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_loved"
+                        android:id="@+id/btn_amei"
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/rate_btn_height"
-                        android:layout_marginEnd="@dimen/spacing_8"
-                        android:layout_marginBottom="@dimen/spacing_8"
-                        android:text="@string/rate_loved"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp"
-                        app:icon="@drawable/ic_heart"
-                        app:iconTint="@color/text_secondary"
-                        app:iconSize="16dp"
-                        app:strokeColor="@color/border_medium"
-                        app:strokeWidth="1.5dp"
-                        app:cornerRadius="@dimen/radius_medium"
-                        android:backgroundTint="@color/card_bg"
-                        app:layout_columnWeight="1"
-                        app:layout_rowSpec="0" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:text="😍 Amei"
+                        android:textSize="12sp" />
 
-                    <!-- Gostei -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_liked"
+                        android:id="@+id/btn_gostei"
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/rate_btn_height"
-                        android:layout_marginBottom="@dimen/spacing_8"
-                        android:text="@string/rate_liked"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp"
-                        app:icon="@drawable/ic_thumb_up"
-                        app:iconTint="@color/text_secondary"
-                        app:iconSize="16dp"
-                        app:strokeColor="@color/border_medium"
-                        app:strokeWidth="1.5dp"
-                        app:cornerRadius="@dimen/radius_medium"
-                        android:backgroundTint="@color/card_bg"
-                        app:layout_columnWeight="1"
-                        app:layout_rowSpec="0" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:text="👍 Gostei"
+                        android:textSize="12sp" />
 
-                    <!-- Não gostei -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_disliked"
+                        android:id="@+id/btn_nao_gostei"
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/rate_btn_height"
-                        android:layout_marginEnd="@dimen/spacing_8"
-                        android:text="@string/rate_disliked"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp"
-                        app:icon="@drawable/ic_thumb_down"
-                        app:iconTint="@color/text_secondary"
-                        app:iconSize="16dp"
-                        app:strokeColor="@color/border_medium"
-                        app:strokeWidth="1.5dp"
-                        app:cornerRadius="@dimen/radius_medium"
-                        android:backgroundTint="@color/card_bg"
-                        app:layout_columnWeight="1"
-                        app:layout_rowSpec="1" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:text="👎 Não"
+                        android:textSize="12sp" />
 
-                    <!-- Odiei -->
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btn_hated"
+                        android:id="@+id/btn_odiei"
                         style="@style/Widget.Material3.Button.OutlinedButton"
                         android:layout_width="0dp"
-                        android:layout_height="@dimen/rate_btn_height"
-                        android:text="@string/rate_hated"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="13sp"
-                        app:icon="@drawable/ic_mood_sad"
-                        app:iconTint="@color/text_secondary"
-                        app:iconSize="16dp"
-                        app:strokeColor="@color/border_medium"
-                        app:strokeWidth="1.5dp"
-                        app:cornerRadius="@dimen/radius_medium"
-                        android:backgroundTint="@color/card_bg"
-                        app:layout_columnWeight="1"
-                        app:layout_rowSpec="1" />
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="😤 Odiei"
+                        android:textSize="12sp" />
 
-                </androidx.gridlayout.widget.GridLayout>
+                </LinearLayout>
 
                 <!--
                     NOTA PARA O DESENVOLVEDOR:

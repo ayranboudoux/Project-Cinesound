@@ -18,6 +18,7 @@ import com.example.cinesound.adapters.TituloAdapter;
 import com.example.cinesound.models.TituloItem;
 import com.example.cinesound.network.Callback;
 import com.example.cinesound.repository.TmdbRepository;
+import com.example.cinesound.ui.detalhes.DetalhesActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,11 +30,6 @@ public class CatalogoFragment extends Fragment {
     private TmdbRepository tmdb;
     private TituloAdapter adapter;
     private List<TituloItem> listaCompleta = new ArrayList<>();
-
-    // filtros ativos
-    private String tipoFiltro = "todos";
-    private List<Integer> generosFiltro = new ArrayList<>();
-    private String ordenacao = "popularity.desc";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,16 +58,15 @@ public class CatalogoFragment extends Fragment {
         });
     }
 
-    // Filtra a lista local sem chamar a API de novo
     private void filtrarPorNome(String query) {
         if (query.isEmpty()) {
             atualizarRecycler(listaCompleta);
             return;
         }
-
         List<TituloItem> filtrada = new ArrayList<>();
+        String q = query.toLowerCase();
         for (TituloItem item : listaCompleta) {
-            if (item.titulo.toLowerCase().contains(query.toLowerCase())) {
+            if (item.titulo != null && item.titulo.toLowerCase().contains(q)) {
                 filtrada.add(item);
             }
         }
@@ -79,26 +74,18 @@ public class CatalogoFragment extends Fragment {
     }
 
     private void carregarCatalogo() {
-        tmdb.buscarFilmes(null, tipoFiltro, ordenacao, generosFiltro,
-                null, null, 1, new Callback<List<TituloItem>>() {
-                    public void onSuccess(List<TituloItem> lista) {
+        tmdb.buscarFilmes("popularity.desc", null, null, null,
+                new Callback<List<TituloItem>>() {
+                    @Override public void onSuccess(List<TituloItem> lista) {
                         listaCompleta = lista;
                         atualizarRecycler(lista);
                     }
-                    public void onError(String msg) {}
+                    @Override public void onError(String msg) {}
                 });
     }
 
-    // Chamado pelo FiltroBottomSheet quando o usuário aplica filtros
-    public void aplicarFiltros(String tipo, List<Integer> generos, String ordem) {
-        this.tipoFiltro    = tipo;
-        this.generosFiltro = generos;
-        this.ordenacao     = ordem;
-        carregarCatalogo();
-    }
-
     private void atualizarRecycler(List<TituloItem> lista) {
-        adapter = new TituloAdapter(lista, item -> abrirDetalhes(item));
+        adapter = new TituloAdapter(lista, this::abrirDetalhes);
         recyclerView.setAdapter(adapter);
     }
 
@@ -106,6 +93,9 @@ public class CatalogoFragment extends Fragment {
         Intent intent = new Intent(getContext(), DetalhesActivity.class);
         intent.putExtra("tmdbId", item.tmdbId);
         intent.putExtra("tipo",   item.tipo);
+        intent.putExtra("titulo", item.titulo);
+        intent.putExtra("poster", item.poster);
+        intent.putExtra("nota",   item.notaTmdb);
         startActivity(intent);
     }
 }
