@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_primary"
-    tools:context=".ui.trending.TrendingFragment">
+    tools:context=".ui.emalta.EmAltaFragment">
 
     <!-- =============================================
          TOOLBAR: Título + Botão busca
@@ -58,6 +58,7 @@
                 app:iconPadding="0dp"
                 app:backgroundTint="@color/bg_tertiary"
                 app:cornerRadius="50dp"
+                android:fontFamily="@font/syne_bold"
                 android:contentDescription="@string/cd_search"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -102,21 +103,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/chip_height"
                 android:text="@string/filter_movies"
-                android:checked="true" />
+                android:fontFamily="@font/syne_regular"
+                android:checked="true"
+                />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_series"
                 style="@style/Widget.CineSound.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/chip_height"
-                android:text="@string/filter_series" />
+                android:text="@string/filter_series"
+                android:fontFamily="@font/syne_bold"
+                />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_all"
                 style="@style/Widget.CineSound.Chip"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/chip_height"
-                android:text="@string/filter_all" />
+                android:text="@string/filter_all"
+                android:fontFamily="@font/syne_bold"
+                />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -136,6 +143,7 @@
         android:paddingHorizontal="@dimen/spacing_16"
         android:paddingBottom="@dimen/spacing_16"
         android:scrollbars="none"
+        android:fontFamily="@font/syne_bold"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/scroll_filters"
         app:layout_constraintBottom_toBottomOf="parent"

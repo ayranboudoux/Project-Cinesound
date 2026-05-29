@@ -135,10 +135,10 @@
                         android:id="@+id/tv_title"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/Syne-bold"
                         android:textColor="@color/text_primary"
                         android:textSize="22sp"
                         android:textStyle="bold"
+                        android:fontFamily="@font/Syne_Bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -164,7 +164,7 @@
                     android:layout_marginBottom="@dimen/spacing_12"
                     android:textColor="@color/text_secondary"
                     android:textSize="13sp"
-                    tools:text="2026 · Aventura · 2h" />
+                    tools:text="Ano · Gênero · Duração" />
 
                 <LinearLayout
                     android:id="@+id/rating_row"
@@ -189,6 +189,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
                         android:layout_marginEnd="@dimen/spacing_6"
+                        android:fontFamily="@font/Syne_Medium"
                         tools:text="8.4" />
 
                     <TextView
@@ -198,6 +199,7 @@
                         android:layout_weight="1"
                         android:textSize="12sp"
                         android:textColor="@color/text_hint"
+                        android:fontFamily="@font/Syne_Regular"
                         tools:text="IMDb · 124.589 votos" />
 
                 </LinearLayout>
@@ -211,7 +213,8 @@
                     android:textColor="@color/text_secondary"
                     android:lineSpacingMultiplier="1.6"
                     android:layout_marginBottom="@dimen/spacing_16"
-                    tools:text="When an interstellar expedition uncovers an ancient relic, Captain Mira Alvarez must navigate political intrigue and cosmic dangers to prevent a catastrophic war between civilizations." />
+                    android:fontFamily="@font/Syne_Medium"
+                    tools:text="Uma jornada emocionante marcada por desafios, escolhas importantes e descobertas que podem mudar tudo." />
 
             </LinearLayout>
 
@@ -255,6 +258,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
+                        android:fontFamily="@font/Syne_Medium"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -270,6 +274,7 @@
                         android:focusable="true"
                         android:background="?attr/selectableItemBackground"
                         android:paddingVertical="@dimen/spacing_4"
+                        android:fontFamily="@font/Syne_Regular"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -314,6 +319,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
+                        android:fontFamily="@font/Syne_Medium"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -329,6 +335,7 @@
                         android:focusable="true"
                         android:background="?attr/selectableItemBackground"
                         android:paddingVertical="@dimen/spacing_4"
+                        android:fontFamily="@font/Syne_Regular"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -367,7 +374,9 @@
                     android:text="@string/detail_where_to_watch"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/text_primary" />
+                    android:textColor="@color/text_primary"
+                    android:fontFamily="@font/Syne_Medium"
+                    />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_platforms"
@@ -404,7 +413,9 @@
                     android:text="@string/detail_your_rating"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/text_primary" />
+                    android:textColor="@color/text_primary"
+                    android:fontFamily="@font/Syne_Medium"
+                    />
 
                 <!-- Botões de classificação do usuário -->
                 <LinearLayout
@@ -423,7 +434,9 @@
                         android:layout_weight="1"
                         android:layout_marginEnd="4dp"
                         android:text="😍 Amei"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:fontFamily="@font/Syne_Regular"
+                        />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_gostei"
@@ -433,7 +446,9 @@
                         android:layout_weight="1"
                         android:layout_marginEnd="4dp"
                         android:text="👍 Gostei"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:fontFamily="@font/Syne_Regular"
+                        />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_nao_gostei"
@@ -443,7 +458,9 @@
                         android:layout_weight="1"
                         android:layout_marginEnd="4dp"
                         android:text="👎 Não"
-                        android:textSize="12sp" />
+                        android:textSize="12sp"
+                        android:fontFamily="@font/Syne_Regular"
+                        />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_odiei"
@@ -452,6 +469,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="😤 Odiei"
+                        android:fontFamily="@font/Syne_Regular"
                         android:textSize="12sp" />
 
                 </LinearLayout>

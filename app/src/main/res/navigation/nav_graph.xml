@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.cinesound.ui.home.HomeFragment"
+        android:label="Início"
+        tools:layout="@layout/fragment_home"
+        xmlns:tools="http://schemas.android.com/tools" />
+
+    <fragment
+        android:id="@+id/nav_trending"
+        android:name="com.example.cinesound.ui.emalta.EmAltaFragment"
+        android:label="Em Alta"
+        tools:layout="@layout/fragment_trending"
+        xmlns:tools="http://schemas.android.com/tools" />
+
+    <fragment
+        android:id="@+id/nav_catalog"
+        android:name="com.example.cinesound.ui.catalogo.CatalogoFragment"
+        android:label="Catálogo"
+        tools:layout="@layout/fragment_catalog"
+        xmlns:tools="http://schemas.android.com/tools" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.cinesound.ui.perfil.PerfilFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_profile"
+        xmlns:tools="http://schemas.android.com/tools" />
+
+</navigation>
