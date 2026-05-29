@@ -14,7 +14,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_primary"
-    tools:context=".ui.auth.LoginActivity">
+    tools:context=".ui.login.LoginActivity">
 
     <!-- =============================================
          ScrollView: evita corte em telas menores
@@ -73,7 +73,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
                 android:letterSpacing="-0.02"
-                android:fontFamily="@font/Syne_Bold"
+                android:fontFamily="@font/syne_bold"
                 app:layout_constraintTop_toBottomOf="@id/logo_icon_container"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -45,7 +45,7 @@
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:background="@drawable/bg_rank_badge"
-            android:fontFamily="@font/Syne_Bold"
+            android:fontFamily="@font/syne_bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:text="#1"
@@ -91,7 +91,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:fontFamily="@font/Syne_Bold"
+                android:fontFamily="@font/syne_bold"
                 android:maxLines="2"
                 android:ellipsize="end"
                 tools:text="Ecos da Meia-Noite" />
@@ -104,7 +104,7 @@
                 android:layout_marginTop="@dimen/spacing_4"
                 android:textSize="12sp"
                 android:textColor="@color/text_hint"
-                android:fontFamily="@font/Syne_Regular"
+                android:fontFamily="@font/syne_regular"
                 tools:text="Gênero · Ano" />
 
             <!-- Sinopse resumida -->
@@ -118,7 +118,7 @@
                 android:lineSpacingMultiplier="1.5"
                 android:maxLines="3"
                 android:ellipsize="end"
-                android:fontFamily="@font/Syne_Medium"
+                android:fontFamily="@font/syne_medium"
                 tools:text="Uma jornada emocionante marcada por desafios, escolhas importantes e descobertas que podem mudar tudo." />
 
             <!-- Linha: nota + tag -->
@@ -138,7 +138,7 @@
                     android:background="@drawable/bg_badge_rating"
                     android:paddingHorizontal="@dimen/spacing_8"
                     android:paddingVertical="@dimen/spacing_4"
-                    android:fontFamily="@font/Syne_Medium"
+                    android:fontFamily="@font/syne_medium"
                     >
 
                     <ImageView
@@ -157,7 +157,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/yellow_star"
                         tools:text="Nota"
-                        android:fontFamily="@font/Syne_Medium"
+                        android:fontFamily="@font/syne_medium"
                         />
 
                 </LinearLayout>
@@ -175,7 +175,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/accent_light"
                     tools:text="Tendências"
-                    android:fontFamily="@font/Syne_Medium"
+                    android:fontFamily="@font/syne_medium"
                     />
 
             </LinearLayout>

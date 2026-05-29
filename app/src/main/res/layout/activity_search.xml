@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_primary"
-    tools:context=".ui.search.SearchActivity">
+    tools:context=".ui.busca.SearchActivity">
 
     <!-- =============================================
          BARRA DE BUSCA (fixa no topo)
@@ -88,7 +88,7 @@
                     android:hint="@string/search_hint"
                     android:textColorHint="@color/text_hint"
                     android:textColor="@color/text_primary"
-                    android:fontFamily="@font/Syne_Regular"
+                    android:fontFamily="@font/syne_regular"
                     android:textSize="14sp"
                     android:inputType="text"
                     android:imeOptions="actionSearch"
@@ -106,7 +106,7 @@
                     style="@style/Widget.Material3.Button.IconButton"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:fontFamily="@font/Syne_Regular"
+                    android:fontFamily="@font/syne_regular"
                     android:visibility="gone"
                     app:icon="@drawable/ic_close_small"
                     app:iconTint="@color/text_hint"
@@ -145,7 +145,7 @@
         android:orientation="vertical"
         android:padding="@dimen/spacing_20"
         android:visibility="visible"
-        android:fontFamily="@font/Syne_Regular"
+        android:fontFamily="@font/syne_regular"
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +155,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sugestões populares"
-            android:fontFamily="@font/Syne_Bold"
+            android:fontFamily="@font/syne_bold"
             android:textSize="13sp"
             android:textColor="@color/text_hint"
             android:layout_marginBottom="@dimen/spacing_12" />
@@ -165,7 +165,7 @@
             android:id="@+id/chip_group_suggestions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/Syne_Regular"
+            android:fontFamily="@font/syne_regular"
             app:chipSpacingHorizontal="@dimen/spacing_6"
             app:chipSpacingVertical="@dimen/spacing_6">
 
@@ -218,7 +218,7 @@
         android:gravity="center"
         android:padding="@dimen/spacing_40"
         android:visibility="gone"
-        android:fontFamily="@font/Syne_Regular"
+        android:fontFamily="@font/syne_regular"
         app:layout_constraintTop_toBottomOf="@id/divider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -237,7 +237,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_16"
             android:text="@string/search_empty"
-            android:fontFamily="@font/Syne_Bold"
+            android:fontFamily="@font/syne_bold"
             android:textSize="14sp"
             android:textColor="@color/text_secondary"
             android:gravity="center" />
@@ -268,7 +268,7 @@
         android:paddingVertical="@dimen/spacing_8"
         android:scrollbars="none"
         android:visibility="gone"
-        android:fontFamily="@font/Syne_Bold"
+        android:fontFamily="@font/syne_bold"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
