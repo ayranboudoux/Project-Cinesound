@@ -1,12 +1,14 @@
 package com.example.cinesound.models;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class GenerosTmdb {
-    public List<Genero> genres;
+    @SerializedName("genres")
+    public List<Genero> generos;
 
     public static class Genero {
-        public int id;
-        public String name;
+        @SerializedName("id")   public int id;
+        @SerializedName("name") public String nome;
     }
 }

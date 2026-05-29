@@ -1,5 +1,5 @@
 package com.example.cinesound.network;
 public interface Callback<T> {
-    void onSuccess(T resultant);
+    void onSuccess(T resultado);
     void onError(String mensagem);
 }
