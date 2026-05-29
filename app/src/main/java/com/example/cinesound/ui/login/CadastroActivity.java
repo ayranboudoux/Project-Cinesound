@@ -39,14 +39,10 @@ public class CadastroActivity extends AppCompatActivity {
 
 
     private void fazerCadastro() {
-        String nome = campoNome.getText().toString().trim();
-
-        String email = campoEmail.getText().toString().trim();
-
-        String senha = campoSenha.getText().toString().trim();
-
+        String nome      = campoNome.getText().toString().trim();
+        String email     = campoEmail.getText().toString().trim();
+        String senha     = campoSenha.getText().toString().trim();
         String confirmar = campoConfirmar.getText().toString().trim();
-
 
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {
             toast("Preencha todos os campos");
@@ -61,21 +57,24 @@ public class CadastroActivity extends AppCompatActivity {
             return;
         }
 
-
-
-        firebase.cadastrar(email, senha, resultado -> {
+        firebase.cadastrar(
+                email,
+                senha,
+                resultado -> {
                     String uid = resultado.getUser().getUid();
-
-                    firebase.salvarPerfil(uid, nome, email, ok -> {
-
+                    firebase.salvarPerfil(
+                            uid,
+                            nome,
+                            email,
+                            ok  -> {
                                 startActivity(new Intent(CadastroActivity.this, MainActivity.class));
-                                finish();},
-
-                            err -> toast("Erro ao salvar perfil"));
+                                finish();
+                            },
+                            err -> toast("Erro ao salvar perfil")
+                    );
                 },
                 err -> toast("Erro ao criar conta: " + err.getMessage())
         );
-
     }
 
 

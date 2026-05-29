@@ -14,7 +14,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_primary"
-    tools:context=".ui.auth.RegisterActivity">
+    tools:context=".ui.login.CadastroActivity">
 
     <!-- Botão voltar fixo no topo (fora do scroll) -->
     <com.google.android.material.button.MaterialButton
@@ -89,7 +89,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:fontFamily="@font/Syne_Bold"
+                android:fontFamily="@font/syne_bold"
                 app:layout_constraintTop_toBottomOf="@id/logo_icon_container"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -104,7 +104,7 @@
                 android:textSize="13sp"
                 android:textColor="@color/text_secondary"
                 android:gravity="center"
-                android:fontFamily="@font/Syne_Regular"
+                android:fontFamily="@font/syne_regular"
                 app:layout_constraintTop_toBottomOf="@id/tv_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -212,7 +212,7 @@
                     android:inputType="textPersonName|textCapWords"
                     android:textColor="@color/text_primary"
                     android:textColorHint="@color/text_hint"
-                    android:fontFamily="@font/Syne_Regular"
+                    android:fontFamily="@font/syne_regular"
                     android:textSize="14sp"
                     android:imeOptions="actionNext"
                     android:hint="Seu nome" />
@@ -240,7 +240,7 @@
                     android:layout_height="@dimen/input_height"
                     android:inputType="textEmailAddress"
                     android:textColor="@color/text_primary"
-                    android:fontFamily="@font/Syne_Regular"
+                    android:fontFamily="@font/syne_regular"
                     android:textColorHint="@color/text_hint"
                     android:textSize="14sp"
                     android:imeOptions="actionNext"
@@ -255,7 +255,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_12"
-                android:fontFamily="@font/Syne_Regular"
+                android:fontFamily="@font/syne_regular"
                 android:hint="@string/label_password"
                 app:startIconDrawable="@drawable/ic_key"
                 app:startIconTint="@color/text_hint"
@@ -274,7 +274,7 @@
                     android:layout_height="@dimen/input_height"
                     android:inputType="textPassword"
                     android:textColor="@color/text_primary"
-                    android:fontFamily="@font/Syne_Regular"
+                    android:fontFamily="@font/syne_regular"
                     android:textColorHint="@color/text_hint"
                     android:textSize="14sp"
                     android:imeOptions="actionNext"
@@ -351,7 +351,7 @@
                     android:inputType="textPassword"
                     android:textColor="@color/text_primary"
                     android:textColorHint="@color/text_hint"
-                    android:fontFamily="@font/Syne_Regular"
+                    android:fontFamily="@font/syne_regular"
                     android:textSize="14sp"
                     android:imeOptions="actionDone"
                     />
@@ -388,7 +388,7 @@
                     android:layout_weight="1"
                     android:text="Li e aceito os Termos de Serviço e a Política de Privacidade"
                     android:textSize="12sp"
-                    android:fontFamily="@font/Syne_Regular"
+                    android:fontFamily="@font/syne_regular"
                     android:textColor="@color/text_secondary"
                     android:lineSpacingMultiplier="1.4" />
 
@@ -406,7 +406,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
-                android:fontFamily="@font/Syne_Bold"
+                android:fontFamily="@font/syne_bold"
                 android:letterSpacing="0.02"
                 app:backgroundTint="@color/accent"
                 app:cornerRadius="@dimen/radius_medium"
@@ -505,7 +505,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Já tem uma conta? "
-                    android:fontFamily="@font/Syne_Regular"
+                    android:fontFamily="@font/syne_regular"
                     android:textSize="14sp"
                     android:textColor="@color/text_secondary"
                     />
@@ -518,7 +518,7 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@color/accent_light"
-                    android:fontFamily="@font/Syne_Bold"
+                    android:fontFamily="@font/syne_bold"
                     android:clickable="true"
                     android:focusable="true"
                     android:background="?attr/selectableItemBackground"

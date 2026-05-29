@@ -13,7 +13,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_primary"
-    tools:context=".ui.detail.DetailsActivity">
+    tools:context=".ui.detalhes.DetalhesActivity">
 
     <!-- =============================================
          APP BAR com CollapsingToolbar
@@ -138,7 +138,7 @@
                         android:textColor="@color/text_primary"
                         android:textSize="22sp"
                         android:textStyle="bold"
-                        android:fontFamily="@font/Syne_Bold"
+                        android:fontFamily="@font/syne_bold"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -189,7 +189,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
                         android:layout_marginEnd="@dimen/spacing_6"
-                        android:fontFamily="@font/Syne_Medium"
+                        android:fontFamily="@font/syne_medium"
                         tools:text="8.4" />
 
                     <TextView
@@ -199,7 +199,7 @@
                         android:layout_weight="1"
                         android:textSize="12sp"
                         android:textColor="@color/text_hint"
-                        android:fontFamily="@font/Syne_Regular"
+                        android:fontFamily="@font/syne_regular"
                         tools:text="IMDb · 124.589 votos" />
 
                 </LinearLayout>
@@ -213,7 +213,7 @@
                     android:textColor="@color/text_secondary"
                     android:lineSpacingMultiplier="1.6"
                     android:layout_marginBottom="@dimen/spacing_16"
-                    android:fontFamily="@font/Syne_Medium"
+                    android:fontFamily="@font/syne_medium"
                     tools:text="Uma jornada emocionante marcada por desafios, escolhas importantes e descobertas que podem mudar tudo." />
 
             </LinearLayout>
@@ -258,7 +258,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:fontFamily="@font/Syne_Medium"
+                        android:fontFamily="@font/syne_medium"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -274,7 +274,7 @@
                         android:focusable="true"
                         android:background="?attr/selectableItemBackground"
                         android:paddingVertical="@dimen/spacing_4"
-                        android:fontFamily="@font/Syne_Regular"
+                        android:fontFamily="@font/syne_regular"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -319,7 +319,7 @@
                         android:textSize="16sp"
                         android:textStyle="bold"
                         android:textColor="@color/text_primary"
-                        android:fontFamily="@font/Syne_Medium"
+                        android:fontFamily="@font/syne_medium"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent" />
@@ -335,7 +335,7 @@
                         android:focusable="true"
                         android:background="?attr/selectableItemBackground"
                         android:paddingVertical="@dimen/spacing_4"
-                        android:fontFamily="@font/Syne_Regular"
+                        android:fontFamily="@font/syne_regular"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent" />
@@ -375,7 +375,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:fontFamily="@font/Syne_Medium"
+                    android:fontFamily="@font/syne_medium"
                     />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -414,7 +414,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
-                    android:fontFamily="@font/Syne_Medium"
+                    android:fontFamily="@font/syne_medium"
                     />
 
                 <!-- Botões de classificação do usuário -->
@@ -435,7 +435,7 @@
                         android:layout_marginEnd="4dp"
                         android:text="😍 Amei"
                         android:textSize="12sp"
-                        android:fontFamily="@font/Syne_Regular"
+                        android:fontFamily="@font/syne_regular"
                         />
 
                     <com.google.android.material.button.MaterialButton
@@ -447,7 +447,7 @@
                         android:layout_marginEnd="4dp"
                         android:text="👍 Gostei"
                         android:textSize="12sp"
-                        android:fontFamily="@font/Syne_Regular"
+                        android:fontFamily="@font/syne_regular"
                         />
 
                     <com.google.android.material.button.MaterialButton
@@ -459,7 +459,7 @@
                         android:layout_marginEnd="4dp"
                         android:text="👎 Não"
                         android:textSize="12sp"
-                        android:fontFamily="@font/Syne_Regular"
+                        android:fontFamily="@font/syne_regular"
                         />
 
                     <com.google.android.material.button.MaterialButton
@@ -469,7 +469,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="😤 Odiei"
-                        android:fontFamily="@font/Syne_Regular"
+                        android:fontFamily="@font/syne_regular"
                         android:textSize="12sp" />
 
                 </LinearLayout>

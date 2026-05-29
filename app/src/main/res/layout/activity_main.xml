@@ -12,7 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_primary"
-    tools:context=".ui.MainActivity">
+    tools:context=".MainActivity">
 
     <!-- NavHostFragment: renderiza os fragments de acordo com a navegação -->
     <androidx.fragment.app.FragmentContainerView

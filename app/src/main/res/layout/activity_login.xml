@@ -73,7 +73,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
                 android:letterSpacing="-0.02"
-                android:fontFamily="@font/Syne_Bold"
+                android:fontFamily="@font/syne_bold"
                 app:layout_constraintTop_toBottomOf="@id/logo_icon_container"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
