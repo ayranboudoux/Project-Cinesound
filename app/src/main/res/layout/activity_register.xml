@@ -411,7 +411,7 @@
                 app:backgroundTint="@color/accent"
                 app:cornerRadius="@dimen/radius_medium"
                 app:elevation="0dp"
-                android:enabled="false"
+                android:enabled="true"
                 app:layout_constraintTop_toBottomOf="@id/terms_row"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
