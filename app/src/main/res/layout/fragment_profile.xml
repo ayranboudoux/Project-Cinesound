@@ -51,7 +51,7 @@
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="@color/accent"
-                    android:fontFamily="@font/syne_bold" />
+                    android:fontFamily="@font/Syne_Bold" />
 
                 <TextView
                     android:id="@+id/tv_profile_subtitle"
@@ -59,8 +59,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/spacing_2"
                     android:text="@string/profile_subtitle"
+                    android:fontFamily="@font/Syne_Regular"
                     android:textSize="13sp"
-                    android:textColor="@color/text_secondary" />
+                    android:textColor="@color/text_secondary"
+                    />
 
             </LinearLayout>
 
@@ -128,6 +130,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_marginStart="@dimen/spacing_14"
+                        android:fontFamily="@font/Syne_Regular"
                         app:layout_constraintTop_toTopOf="@id/card_avatar"
                         app:layout_constraintBottom_toBottomOf="@id/card_avatar"
                         app:layout_constraintStart_toEndOf="@id/card_avatar"
@@ -138,11 +141,11 @@
                             android:id="@+id/tv_user_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/syne_bold"
+                            android:fontFamily="@font/Syne_Bold"
                             android:textColor="@color/text_primary"
-                            android:textSize="17sp"
+                            android:textSize="15dp"
                             android:textStyle="bold"
-                            tools:text="Ronaldo Nazário" />
+                            tools:text="Nome do usuário" />
 
                         <!-- Email -->
                         <TextView
@@ -152,7 +155,8 @@
                             android:layout_marginTop="@dimen/spacing_2"
                             android:textSize="13sp"
                             android:textColor="@color/accent_light"
-                            tools:text="ronaldonazario@gmail.com" />
+                            android:fontFamily="@font/Syne_Regular"
+                            tools:text="nomedousuario@email.com" />
 
                         <!-- Botão alterar perfil -->
                         <com.google.android.material.button.MaterialButton
@@ -166,6 +170,7 @@
                             android:text="@string/profile_edit"
                             android:textColor="@color/text_secondary"
                             android:textSize="12sp"
+                            android:fontFamily="@font/Syne_Regular"
                             app:cornerRadius="@dimen/spacing_6"
                             app:icon="@drawable/ic_pencil"
                             app:iconSize="14dp"
@@ -197,7 +202,8 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:paddingHorizontal="@dimen/spacing_16"
-                    android:layout_marginBottom="@dimen/spacing_12">
+                    android:layout_marginBottom="@dimen/spacing_12"
+                    >
 
                     <ImageView
                         android:layout_width="20dp"
@@ -214,7 +220,9 @@
                         android:text="@string/profile_history"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="@color/text_primary" />
+                        android:textColor="@color/text_primary"
+                        android:fontFamily="@font/Syne_Regular"
+                        />
 
                     <TextView
                         android:id="@+id/tv_history_count"
@@ -222,7 +230,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="12sp"
                         android:textColor="@color/text_hint"
-                        tools:text="42 títulos" />
+                        tools:text="Títulos" />
 
                 </LinearLayout>
 
@@ -274,7 +282,9 @@
                         android:text="@string/profile_fav_movies"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="@color/text_primary" />
+                        android:textColor="@color/text_primary"
+                        android:fontFamily="@font/Syne_Regular"
+                        />
 
                 </LinearLayout>
 
@@ -325,7 +335,9 @@
                         android:text="@string/profile_fav_series"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="@color/text_primary" />
+                        android:textColor="@color/text_primary"
+                        android:fontFamily="@font/Syne_Regular"
+                        />
 
                 </LinearLayout>
 
@@ -376,7 +388,9 @@
                         android:text="@string/profile_fav_soundtracks"
                         android:textSize="15sp"
                         android:textStyle="bold"
-                        android:textColor="@color/text_primary" />
+                        android:textColor="@color/text_primary"
+                        android:fontFamily="@font/Syne_Regular"
+                        />
 
                 </LinearLayout>
 
@@ -408,6 +422,7 @@
                 android:text="@string/btn_logout"
                 android:textSize="14sp"
                 android:textColor="@color/red_negative"
+                android:fontFamily="@font/Syne_Bold"
                 app:iconTint="@color/red_negative"
                 app:iconSize="18dp"
                 app:strokeColor="#66E8534A"

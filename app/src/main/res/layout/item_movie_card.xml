@@ -56,7 +56,7 @@
             android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
-            android:fontFamily="@font/syne_bold"
+            android:fontFamily="@font/Syne_Bold"
             android:maxLines="2"
             android:ellipsize="end"
             app:layout_constraintTop_toTopOf="parent"
@@ -73,10 +73,11 @@
             android:layout_marginTop="@dimen/spacing_4"
             android:textSize="12sp"
             android:textColor="@color/text_hint"
+            android:fontFamily="@font/Syne_Regular"
             app:layout_constraintTop_toBottomOf="@id/tv_title"
             app:layout_constraintStart_toEndOf="@id/card_poster"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Neo-noir · 2023" />
+            tools:text="Gênero · Ano" />
 
         <!-- Descrição / motivo da recomendação -->
         <TextView
@@ -90,10 +91,11 @@
             android:lineSpacingMultiplier="1.5"
             android:maxLines="3"
             android:ellipsize="end"
+            android:fontFamily="@font/Syne_Medium"
             app:layout_constraintTop_toBottomOf="@id/tv_genre_year"
             app:layout_constraintStart_toEndOf="@id/card_poster"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Recomendado porque você gostou de: Midnight Echo e thrillers urbanos com trilhas sonoras marcantes." />
+            tools:text="Recomendado para você que gostou de filmes deste gênero." />
 
         <!-- Linha inferior: rating + tag de categoria -->
         <LinearLayout
@@ -104,6 +106,7 @@
             android:gravity="center_vertical"
             android:layout_marginStart="@dimen/spacing_12"
             android:layout_marginTop="@dimen/spacing_8"
+            android:fontFamily="@font/Syne_Regular"
             app:layout_constraintTop_toBottomOf="@id/tv_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/card_poster"
@@ -118,7 +121,9 @@
                 android:gravity="center_vertical"
                 android:background="@drawable/bg_badge_rating"
                 android:paddingHorizontal="@dimen/spacing_8"
-                android:paddingVertical="@dimen/spacing_4">
+                android:paddingVertical="@dimen/spacing_4"
+                android:fontFamily="@font/Syne_Regular"
+                >
 
                 <ImageView
                     android:layout_width="12dp"
@@ -152,6 +157,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/accent_light"
                 android:visibility="gone"
+                android:fontFamily="@font/Syne_Regular"
                 tools:text="Tendências"
                 tools:visibility="visible" />
 

@@ -45,9 +45,11 @@
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:background="@drawable/bg_rank_badge"
+            android:fontFamily="@font/Syne_Bold"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:text="#1" />
+            tools:text="#1"
+            />
 
         <!-- Pôster do título -->
         <com.google.android.material.card.MaterialCardView
@@ -89,7 +91,7 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
-                android:fontFamily="@font/syne_bold"
+                android:fontFamily="@font/Syne_Bold"
                 android:maxLines="2"
                 android:ellipsize="end"
                 tools:text="Ecos da Meia-Noite" />
@@ -102,7 +104,8 @@
                 android:layout_marginTop="@dimen/spacing_4"
                 android:textSize="12sp"
                 android:textColor="@color/text_hint"
-                tools:text="Neo-noir psicológico · 2026" />
+                android:fontFamily="@font/Syne_Regular"
+                tools:text="Gênero · Ano" />
 
             <!-- Sinopse resumida -->
             <TextView
@@ -115,7 +118,8 @@
                 android:lineSpacingMultiplier="1.5"
                 android:maxLines="3"
                 android:ellipsize="end"
-                tools:text="A haunting, slow-burn mystery recommended for fans of atmospheric thrillers and layered storytelling." />
+                android:fontFamily="@font/Syne_Medium"
+                tools:text="Uma jornada emocionante marcada por desafios, escolhas importantes e descobertas que podem mudar tudo." />
 
             <!-- Linha: nota + tag -->
             <LinearLayout
@@ -133,7 +137,9 @@
                     android:gravity="center_vertical"
                     android:background="@drawable/bg_badge_rating"
                     android:paddingHorizontal="@dimen/spacing_8"
-                    android:paddingVertical="@dimen/spacing_4">
+                    android:paddingVertical="@dimen/spacing_4"
+                    android:fontFamily="@font/Syne_Medium"
+                    >
 
                     <ImageView
                         android:layout_width="12dp"
@@ -150,7 +156,9 @@
                         android:textSize="11sp"
                         android:textStyle="bold"
                         android:textColor="@color/yellow_star"
-                        tools:text="8.7" />
+                        tools:text="Nota"
+                        android:fontFamily="@font/Syne_Medium"
+                        />
 
                 </LinearLayout>
 
@@ -166,7 +174,9 @@
                     android:textSize="10sp"
                     android:textStyle="bold"
                     android:textColor="@color/accent_light"
-                    tools:text="Tendências" />
+                    tools:text="Tendências"
+                    android:fontFamily="@font/Syne_Medium"
+                    />
 
             </LinearLayout>
 
